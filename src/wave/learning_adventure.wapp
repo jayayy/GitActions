@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WaveApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assetIcon>/analytics/wave/web/proto/images/app/icons/11.png</assetIcon>
+    <folder>learning_adventure</folder>
+    <masterLabel>learning adventure</masterLabel>
+    <shares>
+        <accessLevel>Manage</accessLevel>
+        <sharedTo>superbadge_specialist@accenture.com</sharedTo>
+        <sharedToType>User</sharedToType>
+    </shares>
+    <templateOrigin>sfdc_internal__Learning_Adventure</templateOrigin>
+    <templateVersion>6.0</templateVersion>
+</WaveApplication>
