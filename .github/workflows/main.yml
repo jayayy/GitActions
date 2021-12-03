@@ -28,5 +28,5 @@ jobs:
         with: 
           sfdx-auth-url: ${{secrets.AUTH_SECRET}}
           
-        name: "Deploy to org"
-        run: sfdx force:mdapi:deploy --deploydir=convert --testlevel=RunLocalTests --checkonly -w30
+      - name: "Deploy to org"
+      - run: sfdx force:mdapi:deploy --deploydir=convert --testlevel=RunLocalTests --checkonly -w30
