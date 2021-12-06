@@ -38,7 +38,7 @@ jobs:
 
     # Convert to Deploy Source
     - name: Convert to Deploy Source
-      run: sfdx force:source:convert -r ./mytest/force-app -d ./toDeploy
+      run: sfdx force:source:convert -r ./mytest/main -d ./toDeploy
 
     # Deploy
     - name : Deploy to SF Org
