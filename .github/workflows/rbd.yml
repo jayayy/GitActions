@@ -3,9 +3,9 @@ name: test of package
 # Controls when the workflow will run
 on:
   push:
-    branches: [ master ]
+    branches: [ alternative1 ]
   pull_request:
-    branches: [ master ]
+    branches: [ alternative1 ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
