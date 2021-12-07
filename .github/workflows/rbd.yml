@@ -39,9 +39,10 @@ jobs:
       run: sfdx plugins:install sfdx-git-delta
 
     - name: analyze the differences
-      run: |
-      sfdx sgd:source:delta --to HEAD --from HEAD^ --output .
-      cat package/package.xml
+      run: sfdx sgd:source:delta --to HEAD --from HEAD^ --output .
+
+    - name: package generated display
+      run: cat package/package.xml
 
     # Convert to Deploy Source
     - name: Convert to Deploy Source
