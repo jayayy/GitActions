@@ -3,9 +3,9 @@ name: test of package
 # Controls when the workflow will run
 on:
   push:
-    branches: [ master ]
+    branches: [ alternative1 ]
   pull_request:
-    branches: [ master ]
+    branches: [ alternative1 ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -40,12 +40,12 @@ jobs:
     - name: Plugin play
       run: echo y | sfdx plugins:install sfdx-git-delta
 
-    - name: analyze the differences
-      run: sfdx sgd:source:delta --to HEAD --from HEAD^ --output .
-
-    - name: package generated display
-      run: cat package/package.xml
-
     # Convert to Deploy Source
     - name: Convert to Deploy Source
       run: sfdx force:source:convert -r ./mytest/main -d ./toDeploy
+
+    - name: analyze the differences
+      run: sfdx sgd:source:delta --to HEAD --from HEAD^ --source = ./toDeploy
+
+    - name: package generated display
+      run: cat package/package.xml
