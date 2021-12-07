@@ -40,11 +40,8 @@ jobs:
     - name: Plugin play
       run: echo y | sfdx plugins:install sfdx-git-delta
 
-    - name: make a directory
-      run: mkdir changed-sources
-
     - name: analyze the differences
-      run: sfdx sgd:source:delta --to master --from master^ --output changed-sources/ --generate-delta
+      run: sfdx sgd:source:delta --to HEAD --from HEAD^ --output .
 
     - name: package generated display
       run: cat package/package.xml
