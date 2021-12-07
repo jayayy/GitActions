@@ -36,7 +36,7 @@ jobs:
     
     # installing the plugin
     - name: Plugin play
-      run: sfdx plugins:install sfdx-git-delta
+      run: echo y | sfdx plugins:install sfdx-git-delta
 
     - name: analyze the differences
       run: sfdx sgd:source:delta --to HEAD --from HEAD^ --output .
