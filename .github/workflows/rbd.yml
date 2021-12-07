@@ -45,7 +45,7 @@ jobs:
       run: sfdx force:source:convert -r ./mytest/force-app/main/default -d "./toDeploy"
 
     - name: analyze the differences
-      run: sfdx sgd:source:delta --to HEAD --from HEAD^ --source = ./toDeploy
+      run: sfdx sgd:source:delta --to HEAD --from HEAD^ --s "./toDeploy"
 
     - name: package generated display
       run: cat package/package.xml
