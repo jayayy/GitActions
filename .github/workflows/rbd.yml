@@ -45,13 +45,8 @@ jobs:
       run: |
         sfdx force:source:convert -r ./mytest/force-app/main/default -d ./toDeploy
         ls -a
-        sfdx sgd:source:delta --to HEAD --from HEAD^ --source todeploy
-
-    - name: listing the directory structure
-      run: listdr
-
-    - name: analyze the differences
-      run: sfdx sgd:source:delta --to HEAD --from HEAD^ --source todeploy  
+        cd ./todeploy
+        sfdx sgd:source:delta --to HEAD --from HEAD^ --source ./todeploy
 
     - name: package generated display
       run: cat package/package.xml
