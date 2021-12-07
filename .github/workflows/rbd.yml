@@ -41,7 +41,7 @@ jobs:
       run: echo y | sfdx plugins:install sfdx-git-delta
 
     - name: analyze the differences
-      run: sfdx sgd:source:delta --to HEAD --from HEAD^ --output .
+      run: sfdx sgd:source:delta --to master --from master^ --output .
 
     - name: package generated display
       run: cat package/package.xml
