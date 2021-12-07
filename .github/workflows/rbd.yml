@@ -42,7 +42,7 @@ jobs:
 
     # Convert to Deploy Source
     - name: Convert to Deploy Source
-      run: sfdx force:source:convert -r ./mytest/main -d ./toDeploy
+      run: sfdx force:source:convert -r ./mytest/force-app/main/default -d ./toDeploy
 
     - name: analyze the differences
       run: sfdx sgd:source:delta --to HEAD --from HEAD^ --source = ./toDeploy
