@@ -48,7 +48,7 @@ jobs:
       run: |
         sfdx force:source:convert -r ./mytest/force-app/main/default -d ./toDeploy
         mkdir output
-        sfdx sgd:source:delta --to HEAD --from HEAD^ --source ./toDeploy
+        sfdx sgd:source:delta --to HEAD --from HEAD^ --source ./mytest/force-app/main/default
 
     - name: package generated display
       run: cat output/package/package.xml
