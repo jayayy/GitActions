@@ -7,7 +7,7 @@ public class DataManager_controller {
     
     public String error {get;set;}
     
-    // UI used Boolean to check wether the data dates are up to date
+    // UI used Boolean to check wether the data dates are up to date; midufy according to the video lesss see
     public Boolean is_up_to_date {get; set;}
     public Integer act_days_diff {get; set;}
     public String sref_date {get; set;}
