@@ -48,7 +48,7 @@ jobs:
       run: |
         sfdx force:source:convert -r ./mytest/force-app/main/default -d ./toDeploy
         ls -a
-        cd /toDeploy
+        cd toDeploy
         sfdx sgd:source:delta --to HEAD --from HEAD^ --source /toDeploy
 
     - name: package generated display
