@@ -4,10 +4,10 @@ name: test of package
 on:
   push:
     branches: [ alternative1 ]
-    paths: 'mytest/force-app/main/default/**'
+    #paths: 'mytest/force-app/main/default/**'
   pull_request:
     branches: [ alternative1 ]
-    paths: 'mytest/force-app/main/default/**'
+    #paths: 'mytest/force-app/main/default/**'
 
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -47,12 +47,8 @@ jobs:
     - name: Convert to Deploy Source
       run: |
         sfdx force:source:convert -r ./mytest/force-app/main/default -d ./toDeploy
-        ls -a
-        cd toDeploy
-        ls -a
-        cd ..
         mkdir output
         sfdx sgd:source:delta --to HEAD --from HEAD^ --source ./toDeploy
 
     - name: package generated display
-      run: cat package/package.xml
+      run: cat output/package/package.xml
