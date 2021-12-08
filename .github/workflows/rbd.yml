@@ -45,7 +45,10 @@ jobs:
     - name: Convert to Deploy Source
       run: |
         mkdir output
-        sfdx sgd:source:delta --to HEAD --from HEAD^ 
+        sfdx sgd:source:delta --from "83b3f692660359c486f6bfa94496da27fd46d356" --to "a77a04bdab03a13e7d19d2b37088a993b5775301" 
 
     - name: package generated display
       run: cat output/package/package.xml
+
+    - name: deploy to org
+      run: sfdx force:mdapi:deploy -d "output/package/package.xml"
