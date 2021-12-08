@@ -1,7 +1,7 @@
 public class DataManager_CleanUp implements Queueable  {
     private map<string, map<string,id>> objectIdbyName;
     
-    // List of Accs to edit, initiated in the constructor sasdad commit v2 commit according to the  video less see
+    // List of Accs to edit, initiated in the 
     private List<Account> DTC_Accs;
     
     
