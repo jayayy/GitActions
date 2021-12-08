@@ -1,12 +1,18 @@
-Started with article:https://abhisheksubbu.github.io/salesforce-github-devops/ and used https://mannharleen.github.io/2020-03-03-salesforce-jwt/ 
-to remove the authentication problems.
+# Salesforce DX Project: Next Steps
 
-Created an sfdx project and converted the entire project to that format using convert sfdx command as follows: 
-sfdx force:project:create --projectname {mytest}
-sfdx force:mdapi:convert -r {sourcepath} -d {mytest} // with correct and appropriate paths 
+Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
 
-Conversion from metadata to sfdx will happen only with a sfdx format project.
+## How Do You Plan to Deploy Your Changes?
 
-Next: cleared all the errors that came during deployment such as 'You cannot edit these components' and 'Coverage errros' by removing everything that threw an error, bruteforced it! 
+Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
 
-Next step: Linking multiple orgs with the same repository. Reading through github actions syntax and https://atrium.ai/resources/how-to-implement-salesforce-ci-cd-with-github-actions/. 
+## Configure Your Salesforce DX Project
+
+The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+
+## Read All About It
+
+- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
+- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
+- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
+- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
