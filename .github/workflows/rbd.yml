@@ -4,8 +4,11 @@ name: test of package
 on:
   push:
     branches: [ alternative1 ]
+    paths: 'mytest/force-app/main/default/**'
   pull_request:
     branches: [ alternative1 ]
+    paths: 'mytest/force-app/main/default/**'
+
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
