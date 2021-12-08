@@ -4,8 +4,11 @@ name: test of package
 on:
   push:
     branches: [ alternative1 ]
+    paths: 'mytest/force-app/main/default/**'
   pull_request:
     branches: [ alternative1 ]
+    paths: 'mytest/force-app/main/default/**'
+
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -22,7 +25,7 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v1
       with: 
-        node-version: '14'
+        node-version: '16'
     
     # Install SFDX CLI
     - name: Install SFDX CLI
@@ -42,10 +45,11 @@ jobs:
 
     # Convert to Deploy Source
     - name: Convert to Deploy Source
-      run: sfdx force:source:convert -r ./mytest/force-app/main/default -d "./toDeploy"
-
-    - name: analyze the differences
-      run: sfdx sgd:source:delta --to HEAD --from HEAD^ --source ./todeploy
+      run: |
+        sfdx force:source:convert -r ./mytest/force-app/main/default -d ./toDeploy
+        ls -a
+        cd /toDeploy
+        sfdx sgd:source:delta --to HEAD --from HEAD^ --source /toDeploy
 
     - name: package generated display
       run: cat package/package.xml
