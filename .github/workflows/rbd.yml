@@ -51,4 +51,6 @@ jobs:
       run: cat output/package/package.xml
 
     - name: deploy to org
-      run: sfdx force:mdapi:deploy -d "output/package/package.xml" -u prod -w 10
+      run: |
+      sfdx force:source:convert --manifest="output/package/package.xml" --outdir=convert
+      sfdx force:mdapi:deploy -d convert -u prod -w 10
