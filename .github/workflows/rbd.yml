@@ -3,10 +3,10 @@ name: test of package
 # Controls when the workflow will run
 on:
   push:
-    branches: [ alternative1 ]
+    branches: [ sfdxformat ]
     #paths: 'mytest/force-app/main/default/**'
   pull_request:
-    branches: [ alternative1 ]
+    branches: [ sfdxformat ]
     #paths: 'mytest/force-app/main/default/**'
 
 
