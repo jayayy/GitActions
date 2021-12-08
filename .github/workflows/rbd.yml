@@ -49,7 +49,10 @@ jobs:
         sfdx force:source:convert -r ./mytest/force-app/main/default -d ./toDeploy
         ls -a
         cd toDeploy
-        sfdx sgd:source:delta --to HEAD --from HEAD^ --source /toDeploy
+        ls -a
+        cd ..
+        mkdir output
+        sfdx sgd:source:delta --to HEAD --from HEAD^ --source ./toDeploy
 
     - name: package generated display
       run: cat package/package.xml
