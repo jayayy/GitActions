@@ -5,7 +5,7 @@ public class DataManager_Activity  implements Queueable {
     // List of Event to import, initiated in the constructor
     private List<Event> DTC_Events;
     
-    // List of Tasks to import, initiated in the constructor
+    // List of Tasks to import, initiated in the constructor; update in comments
     private List<Task> DTC_Tasks;
     
     // List of Telephony to import, initiated in the constructor
