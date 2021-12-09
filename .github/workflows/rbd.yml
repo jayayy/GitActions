@@ -43,10 +43,14 @@ jobs:
 
     # Convert to Deploy Source; the --from commit id being the last successful 
     - name: Convert to Deploy Source
-      run: sfdx sgd:source:delta --to HEAD --from 83b3f692660359c486f6bfa94496da27fd46d356 --output . --source ./force-app
+      run: |
+        mkdir output
+        sfdx sgd:source:delta --to HEAD --from 83b3f692660359c486f6bfa94496da27fd46d356 --output ./output --source ./force-app -d
 
     - name: package generated display
-      run: cat package/package.xml
+      run: |
+        cat package/package.xml
+        ls output
 
     - name: deploy to org
       run: sfdx force:source:deploy -x package/package.xml -u prod
