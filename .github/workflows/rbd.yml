@@ -40,7 +40,7 @@ jobs:
       run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile ./buildfiles/server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
     
     # installing the plugin
-    - name: Plugin play
+    - name: Plugin Play
       run: echo y | sfdx plugins:install sfdx-git-delta
 
     # Convert to Deploy Source
@@ -48,4 +48,4 @@ jobs:
       run: sfdx sgd:source:delta --to HEAD --from HEAD^ --source ./mytest/force-app/main/default --output ./
         
     - name: package generated display
-      run: cat output/package/package.xml
+      run: cat package/package.xml
