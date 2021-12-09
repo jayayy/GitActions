@@ -49,7 +49,7 @@ jobs:
 
     - name: package generated display
       run: |
-        cat package/package.xml
+        cat output/package/package.xml
         ls output
 
     - name: deploy to org
