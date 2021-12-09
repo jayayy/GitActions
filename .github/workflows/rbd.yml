@@ -43,7 +43,7 @@ jobs:
 
     # Convert to Deploy Source
     - name: Convert to Deploy Source
-      run: sfdx sgd:source:delta --from "83b3f692660359c486f6bfa94496da27fd46d356" --to "3ba65d2179793fd1dcb48b756f7be44a751605f3" --output .
+      run: sfdx sgd:source:delta --to "83b3f692660359c486f6bfa94496da27fd46d356" --from "3ba65d2179793fd1dcb48b756f7be44a751605f3" --output .
 
     - name: package generated display
       run: cat package/package.xml
