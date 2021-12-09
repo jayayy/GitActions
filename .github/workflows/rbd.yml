@@ -45,7 +45,7 @@ jobs:
 
     # Convert to Deploy Source
     - name: Convert to Deploy Source
-      run: sfdx sgd:source:delta --to HEAD --from HEAD^ --source ./mytest/force-app/main/default
+      run: sfdx sgd:source:delta --to HEAD --from HEAD^ --source ./mytest/force-app/main/default --output ./
         
     - name: package generated display
       run: cat output/package/package.xml
