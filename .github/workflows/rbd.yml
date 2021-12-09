@@ -41,9 +41,9 @@ jobs:
         INSTANCE_URL: ${{ secrets.SALESFORCEPRODINSTANCEURL }}
       run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile ./buildfiles/server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
 
-    # Convert to Deploy Source
+    # Convert to Deploy Source; the --from commit id being the last successful deployment
     - name: Convert to Deploy Source
-      run: sfdx sgd:source:delta --to a77a04bdab03a13e7d19d2b37088a993b5775301 --from 83b3f692660359c486f6bfa94496da27fd46d356 --output .
+      run: sfdx sgd:source:delta --to HEAD --from 83b3f692660359c486f6bfa94496da27fd46d356 --output . --source ./force-app
 
     - name: package generated display
       run: cat package/package.xml
