@@ -52,5 +52,4 @@ jobs:
         cat output/package/package.xml
         ls output
 
-    - name: deploy to org
-      run: sfdx force:source:deploy -x package/package.xml -u prod
+    
