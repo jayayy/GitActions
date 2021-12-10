@@ -41,7 +41,7 @@ jobs:
         INSTANCE_URL: ${{ secrets.SALESFORCEPRODINSTANCEURL }}
       run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile ./buildfiles/server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
 
-    # Convert to Deploy Source; the --from commit id being the last successful 
+    # Convert to Deploy Source; the --from commit id being the last successful deployment id
     - name: Convert to Deploy Source
       run: |
         mkdir output
