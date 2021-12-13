@@ -25,10 +25,10 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v1
       with: 
-        node-version: '14'
+        node-version: '16'
     
     # Install SFDX CLI
-    - name: Install SFDX CLI
+    - name: Installations and Version Checks
       run: |
         npm install sfdx-cli --global
         echo y | sfdx plugins:install sfdx-git-delta
@@ -44,12 +44,12 @@ jobs:
       run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile ./buildfiles/server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
 
     # Convert to Deploy Source; the --from commit id being the last successful deployment id commit sha: 83b3f692660359c486f6bfa94496da27fd46d356
-    - name: Convert to Deploy Source
+    - name: Generate Package using SGD
       run: |
         mkdir output
         sfdx sgd:source:delta --to HEAD --from HEAD^ --output ./output --source ./force-app -d
 
-    - name: package generated display
+    - name: Display Generated Package
       run: |
         cat output/package/package.xml
         ls output
