@@ -33,6 +33,8 @@ jobs:
         npm install -g sfdx-cli@7.129.0
         sfdx -v
         echo y | sfdx plugins:install sfdx-git-delta
+        sudo dnf install git-all
+
 
     # Authorize SF Org
     - name: Authorize SF Org
