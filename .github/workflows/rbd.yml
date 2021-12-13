@@ -49,7 +49,7 @@ jobs:
     - name: Generate Package using SGD
       run: |
         mkdir output
-        sfdx sgd:source:delta --to "HEAD:" --from "HEAD^" --output "./output" --source "./force-app" -d
+        sfdx sgd:source:delta --to "HEAD" --from "HEAD^" --output "./output" --source "./force-app" -d
 
     - name: Display Generated Package
       run: |
