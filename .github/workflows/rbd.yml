@@ -30,11 +30,8 @@ jobs:
     # Install SFDX CLI
     - name: Install SFDX CLI
       run: |
-        npm install -g sfdx-cli@7.129.0
-        sfdx -v
+        npm install sfdx-cli --global
         echo y | sfdx plugins:install sfdx-git-delta
-        git --version
-
 
     # Authorize SF Org
     - name: Authorize SF Org
