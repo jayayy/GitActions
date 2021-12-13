@@ -53,4 +53,4 @@ jobs:
       run: cat package/package.xml
 
     - name: Deploy to org 
-      run: sfdx force:source:deploy -d package/package.xml
+      run: sfdx force:source:deploy -x package/package.xml
