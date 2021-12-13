@@ -32,6 +32,7 @@ jobs:
       run: |
         npm install sfdx-cli --global
         echo y | sfdx plugins:install sfdx-git-delta
+        uname -v ; yarn -v ; node -v ; git --version ; sfdx --version ; sfdx plugins
 
     # Authorize SF Org
     - name: Authorize SF Org
