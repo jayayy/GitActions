@@ -33,7 +33,7 @@ jobs:
         npm install -g sfdx-cli@7.129.0
         sfdx -v
         echo y | sfdx plugins:install sfdx-git-delta
-        sudo dnf install git-all
+        git --version
 
 
     # Authorize SF Org
@@ -44,11 +44,11 @@ jobs:
         INSTANCE_URL: ${{ secrets.SALESFORCEPRODINSTANCEURL }}
       run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile ./buildfiles/server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
 
-    # Convert to Deploy Source; the --from commit id being the last successful deployment id
+    # Convert to Deploy Source; the --from commit id being the last successful deployment id commit sha: 83b3f692660359c486f6bfa94496da27fd46d356
     - name: Convert to Deploy Source
       run: |
         mkdir output
-        sfdx sgd:source:delta --to HEAD --from 83b3f692660359c486f6bfa94496da27fd46d356 --output ./output --source ./force-app -d
+        sfdx sgd:source:delta --to "HEAD" --from "HEAD~1" --output ./output --source ./force-app -d
 
     - name: package generated display
       run: |
