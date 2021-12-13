@@ -21,12 +21,14 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+      with: 
+        fetch-depth: '0'
 
     - name: Setup Node
       uses: actions/setup-node@v1
       with: 
         node-version: '14'
-        fetch-depth: '0'
+       
     
     # Install SFDX CLI
     - name: Installations - CLI and SGD
