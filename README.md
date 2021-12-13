@@ -17,3 +17,9 @@ Source - If there is more than 1 component to be deployed & 1 fails, those that 
 MDAPI - If there is more than 1 component to be deployed & 1 fails, no file in scope is deployed.
 
 **Advantage of Source approach** - Developers are not blocked until a past error is fixed.
+
+**Identifying the last successful commit Id** :
+To get the short version of the commit Id that triggered the workflow -
+  git rev-parse --short "$GITHUB_SHA"
+  (To-do : we don't need short version. To use the full version of commit & store it on a file / if it's possible to write into secrets from workflows, 
+  then store it in secrets)
