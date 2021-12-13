@@ -36,7 +36,7 @@ jobs:
     - name: Environment Versions
       run: |
         uname -v ; yarn -v ; node -v ; git --version ; sfdx --version ; sfdx plugins
-        git diff HEAD HEAD^
+        git diff-tree --no-commit-id --name-only -r HEAD
 
     # Authorize SF Org
     - name: Authorize SF Org
