@@ -28,12 +28,16 @@ jobs:
         node-version: '16'
     
     # Install SFDX CLI
-    - name: Installations and Version Checks
+    - name: Installations - CLI and SGD
       run: |
         npm install sfdx-cli --global
         echo y | sfdx plugins:install sfdx-git-delta
+  
+    - name: Specimen Information
+      run: |
         uname -v ; yarn -v ; node -v ; git --version ; sfdx --version ; sfdx plugins
-        git diff HEAD^ HEAD
+        git diff HEAD HEAD^
+
     # Authorize SF Org
     - name: Authorize SF Org
       env:
