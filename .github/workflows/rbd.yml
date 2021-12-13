@@ -21,6 +21,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+      with: 
+        fetch-depth:0
 
     - name: Setup Node
       uses: actions/setup-node@v1
@@ -49,3 +51,6 @@ jobs:
         
     - name: package generated display
       run: cat package/package.xml
+
+    - name: Deploy to org 
+      run: sfdx force:source:deploy -d package/package.xml
