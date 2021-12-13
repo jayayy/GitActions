@@ -33,7 +33,7 @@ jobs:
         npm install sfdx-cli --global
         echo y | sfdx plugins:install sfdx-git-delta
   
-    - name: Specimen Information
+    - name: Environment Versions
       run: |
         uname -v ; yarn -v ; node -v ; git --version ; sfdx --version ; sfdx plugins
         git diff HEAD HEAD^
