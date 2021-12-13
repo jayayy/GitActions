@@ -45,7 +45,7 @@ jobs:
     - name: Convert to Deploy Source
       run: |
         mkdir output
-        sfdx sgd:source:delta --to HEAD --from HEAD~1 --output ./output --source ./force-app -d
+        sfdx sgd:source:delta --to HEAD --from HEAD^ --output ./output --source ./force-app -d
 
     - name: package generated display
       run: |
