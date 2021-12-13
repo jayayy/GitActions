@@ -26,6 +26,7 @@ jobs:
       uses: actions/setup-node@v1
       with: 
         node-version: '14'
+        fetch-depth: '0'
     
     # Install SFDX CLI
     - name: Installations - CLI and SGD
