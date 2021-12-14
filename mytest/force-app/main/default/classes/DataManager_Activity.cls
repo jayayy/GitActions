@@ -2,7 +2,7 @@ public class DataManager_Activity  implements Queueable {
     private map<string, map<string,id>> objectIdbyName;
     map<string, Opportunity> oppsByName;
     
-    //changed the deployment argument let's sew, in my porch hahaha initiated in the constructor
+    //changed the deployment argument let's see, in my porch hahaha in a new, worse structure
     private List<Event> DTC_Events;
     
     // List of Tasks to import, initiated in the constructor; update in comments

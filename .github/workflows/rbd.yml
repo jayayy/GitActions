@@ -31,7 +31,9 @@ jobs:
     
     # Install SFDX CLI
     - name: Install SFDX CLI
-      run: npm install sfdx-cli --global
+      run: |
+      npm install sfdx-cli --global
+      echo y | sfdx plugins:install sfdx-git-delta
 
     # Authorize SF Org
     - name: Authorize SF Org
@@ -40,10 +42,6 @@ jobs:
         USERNAME: ${{ secrets.SALESFORCEPRODUSERNAME }}
         INSTANCE_URL: ${{ secrets.SALESFORCEPRODINSTANCEURL }}
       run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile ./buildfiles/server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
-    
-    # installing the plugin
-    - name: Plugin Play
-      run: echo y | sfdx plugins:install sfdx-git-delta
 
     # Convert to Deploy Source
     - name: Convert to Deploy Source
@@ -53,4 +51,4 @@ jobs:
       run: cat package/package.xml
 
     - name: Deploy to org 
-      run: sfdx force:source:deploy -x package/package.xml
+      run: sfdx force:source:deploy -x ./package/package.xml -u prod
