@@ -32,8 +32,8 @@ jobs:
     # Install SFDX CLI
     - name: Install SFDX CLI
       run: |
-      npm install sfdx-cli --global
-      echo y | sfdx plugins:install sfdx-git-delta
+        npm install sfdx-cli --global
+        echo y | sfdx plugins:install sfdx-git-delta
 
     # Authorize SF Org
     - name: Authorize SF Org
@@ -45,7 +45,7 @@ jobs:
 
     # Convert to Deploy Source
     - name: Convert to Deploy Source
-      run: sfdx sgd:source:delta --to HEAD --from HEAD^ --source ./mytest/force-app/main/default --output ./
+      run: sfdx sgd:source:delta --to HEAD --from cd06266 --source ./mytest/force-app/main/default --output ./
         
     - name: package generated display
       run: cat package/package.xml
