@@ -61,4 +61,4 @@ jobs:
 
     - name: Deploy Source 
       run: |
-        sfdx force:source:deploy -p output/force-app
+        sfdx force:source:deploy -p output/force-app -u prod -w 10
