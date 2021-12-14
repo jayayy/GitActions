@@ -1,4 +1,4 @@
-name: Deploy to Master
+name: Deploy to Master - Legacy
 
 
 on:

@@ -1,11 +1,14 @@
-name: test of package
+name: Delta Deploy
 
 # Controls when the workflow will run
 on:
   push:
-    branches: [ alternative1 ]
+    branches: [ master ]
+    paths: 'mytest/main/default/**'
+
   pull_request:
-    branches: [ alternative1 ]
+    branches: [ master ]
+    paths: 'mytest/main/default/**'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -14,19 +17,22 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # using fetch-depth = 0 to make the entire history of commits available
     - uses: actions/checkout@v2
+      with: 
+        fetch-depth: 0
 
     - name: Setup Node
       uses: actions/setup-node@v1
       with: 
-        node-version: '14'
+        node-version: '16'
     
     # Install SFDX CLI
     - name: Install SFDX CLI
-      run: npm install sfdx-cli --global
+      run: |
+        npm install sfdx-cli --global
+        echo y | sfdx plugins:install sfdx-git-delta
 
     # Authorize SF Org
     - name: Authorize SF Org
@@ -36,16 +42,11 @@ jobs:
         INSTANCE_URL: ${{ secrets.SALESFORCEPRODINSTANCEURL }}
       run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile ./buildfiles/server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
     
-    # installing the plugin
-    - name: Plugin play
-      run: echo y | sfdx plugins:install sfdx-git-delta
+    - name: Package Generator
+      run: |
+        sfdx sgd:source:delta --to HEAD --from HEAD^ --output .
+        cat package/package.xml 
 
-    - name: analyze the differences
-      run: sfdx sgd:source:delta --to HEAD --from HEAD^ --output .
-
-    - name: package generated display
-      run: cat package/package.xml
-
-    # Convert to Deploy Source
+    # Deploy directly to Org; use alias as per org, no real implications
     - name: Convert to Deploy Source
-      run: sfdx force:source:convert -r ./mytest/main -d ./toDeploy
+      run: sfdx force:source:deploy -x package/package.xml -u prod
