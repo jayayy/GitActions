@@ -2,7 +2,7 @@
     "namespace": "",
     "packageDirectories": [
         {
-            "path": "src",
+            "path": "./",
             "default": true
         }
     ],
