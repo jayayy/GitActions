@@ -42,18 +42,19 @@ jobs:
         INSTANCE_URL: ${{ secrets.SALESFORCEPRODINSTANCEURL }}
       run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile ./buildfiles/server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
     
-    - name: Package Generator
+    - name: Create Delta Changes Package
       run: |
-        sfdx sgd:source:delta --to HEAD --from HEAD^ --output ./ --source=mytest/main/default/
+        sfdx sgd:source:delta --to HEAD --from ${{cat deploymentCommit.txt}} --output ./ --source=mytest/main/default/
         cat package/package.xml 
 
     # Deploy directly to Org; use alias as per org, no real implications
-    - name: Create Delta Package
+    - name: Deploy Package Changes
       run: sfdx force:source:deploy -x package/package.xml -u prod 
         
-    - name: Storing commit SHA if deployment Successful
+    - name: Storing SHA if deployment Successful
       run: |
-        sfdx force:source:deploy:report -u prod | tee ./deploymentCommit.txt
+        sfdx force:source:deploy:report -u prod
+        echo ${{GITHUB_SHA}} >> deploymentCommit.txt
         git config --global usser.email "mehta.jay223@gmail.com"
         git config --global user.name "JayMehta"
         git status
@@ -61,8 +62,7 @@ jobs:
         git commit -m "Last deployed Commit SHA updated"
         git push
 
-    - name: Storing commit SHA if deployment Successful
-      run: head -2 deploymentCommit.txt | tail -1
+
 
       
       
