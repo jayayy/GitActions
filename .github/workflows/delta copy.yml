@@ -32,23 +32,20 @@ jobs:
     
     # Authorize SF Org
 
-    - name: Read branch.properties
+    - name: Read deploymentCommit.txt
       id: commit
       uses: juliangruber/read-file-action@v1
       with:
         path: ./deploymentCommit.txt
 
-    - name: Assign release version from version.properties to Env variable
+    - name: Print Commit ID Prev vs. Commit ID latest
       run: |
-        echo "${{ steps.commit.outputs.content }}" >> $GITHUB_ENV  
-      
-    - name: Test Procedure
-      id: vars
-      run: |
-        echo ${{env.GITHUB_ENV}}
-        echo "::group::github token"
+        echo "${{ steps.commit.outputs.content }}" 
         echo $GITHUB_SHA >> deploymentCommit.txt
         cat deploymentCommit.txt
+        
+      
+
         
 
     # Deploy directly to Org; use alias as per org, no real implications
