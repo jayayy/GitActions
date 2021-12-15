@@ -1,4 +1,4 @@
-name: Delta Deploy
+name: Test in VM
 
 # Controls when the workflow will run
 on:
