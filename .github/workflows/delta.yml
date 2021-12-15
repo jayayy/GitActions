@@ -55,6 +55,7 @@ jobs:
       run: |
         sfdx force:source:deploy:report -u prod | tee ./deploymentCommit.txt
         cat deploymentCommit.txt
+        git status
 
 
       
