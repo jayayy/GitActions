@@ -33,9 +33,11 @@ jobs:
     # Authorize SF Org
     
     - name: Test Procedure
+      id: vars
       run: |
         echo "::group::echo deployment"
         echo ::set-output name=version::$(cat deploymentCommit.txt)
+        echo ${{ steps.vars.outputs.version }}
         echo "cat ./deploymentCommit.txt"
         echo "::group::env variable"
         echo ${{env.commitid}}
