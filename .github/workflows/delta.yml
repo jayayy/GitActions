@@ -49,4 +49,10 @@ jobs:
 
     # Deploy directly to Org; use alias as per org, no real implications
     - name: Convert to Deploy Source
-      run: sfdx force:source:deploy -x package/package.xml -u prod
+      run: |
+        sfdx force:source:deploy -x package/package.xml -u prod
+        sfdx force:source:deploy:report 
+      
+
+      
+      
