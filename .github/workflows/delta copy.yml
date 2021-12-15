@@ -34,7 +34,7 @@ jobs:
     
     - name: Test Procedure
       env: 
-        commitid: $(cat ./deploymentCommit.txt)
+        commitid: echo "cat ./deploymentCommit.txt" 
       run: |
         echo ${{cat ./deploymentCommit.txt}}
         echo ${{env.commitid}}
