@@ -40,6 +40,7 @@ jobs:
         echo ${{env.commitid}}
         echo "::group::github token"
         echo $GITHUB_SHA >> deploymentCommit.txt
+        cat deploymentCommit.txt
         
 
     # Deploy directly to Org; use alias as per org, no real implications
