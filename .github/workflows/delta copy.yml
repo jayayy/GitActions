@@ -36,7 +36,7 @@ jobs:
       env: 
         commitid: $(cat ./deploymentCommit.txt)
       run: |
-        echo $cat ./deploymentCommit.txt
+        echo ${{cat ./deploymentCommit.txt}}
         echo $GITHUB_SHA
 
     # Deploy directly to Org; use alias as per org, no real implications
