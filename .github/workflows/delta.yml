@@ -43,6 +43,8 @@ jobs:
       run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile ./buildfiles/server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
     
     - name: Create Delta Changes Package
+      env: 
+        commit: ${{cat ./deploymentCommit.txt}}
       run: |
         commit = cat ./deploymentCommit.txt
         echo commit
