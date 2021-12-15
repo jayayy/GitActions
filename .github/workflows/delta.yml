@@ -54,8 +54,11 @@ jobs:
     - name: Storing commit SHA if deployment Successful
       run: |
         sfdx force:source:deploy:report -u prod | tee ./deploymentCommit.txt
-        cat deploymentCommit.txt
+        head -2 deploymentCommit.txt | tail -1
         git status
+        git add deploymentCommit.txt
+        git commit -m "Last deployed Commit SHA updated"
+        git push
 
 
       
