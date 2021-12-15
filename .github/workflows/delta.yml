@@ -44,7 +44,7 @@ jobs:
     
     - name: Create Delta Changes Package
       env: 
-        commit: ${{cat ./deploymentCommit.txt}}
+        commit: $(cat ./deploymentCommit.txt)
       run: |
         commit = cat ./deploymentCommit.txt
         echo commit
