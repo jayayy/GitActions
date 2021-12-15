@@ -44,7 +44,8 @@ jobs:
     
     - name: Create Delta Changes Package
       run: |
-        sfdx sgd:source:delta --to HEAD --from ${{cat ./deploymentCommit.txt}} --output ./ --source=mytest/main/default/
+        commit = cat ./deploymentCommit.txt
+        sfdx sgd:source:delta --to HEAD --from commit --output ./ --source=mytest/main/default/
         cat package/package.xml 
 
     # Deploy directly to Org; use alias as per org, no real implications
