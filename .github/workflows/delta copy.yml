@@ -35,6 +35,7 @@ jobs:
     - name: Test Procedure
       run: |
         echo "::group::echo deployment"
+        echo ::set-output name=version::$(cat deploymentCommit.txt)
         echo "cat ./deploymentCommit.txt"
         echo "::group::env variable"
         echo ${{env.commitid}}
