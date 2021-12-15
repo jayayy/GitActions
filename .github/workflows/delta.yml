@@ -4,11 +4,11 @@ name: Delta Deploy
 on:
   push:
     branches: [ master ]
-    paths: 'mytest/main/default/**'
+    #paths: 'mytest/main/default/**'
 
   pull_request:
     branches: [ master ]
-    paths: 'mytest/main/default/**'
+    #paths: 'mytest/main/default/**'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
