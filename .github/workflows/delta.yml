@@ -60,7 +60,7 @@ jobs:
     - name: Storing SHA if deployment Successful
       run: |
         sfdx force:source:deploy:report -u prod
-        echo GITHUB_SHA > ./deploymentCommit.txt
+        echo $GITHUB_SHA > ./deploymentCommit.txt
         git config --global usser.email "mehta.jay223@gmail.com"
         git config --global user.name "JayMehta"
         git status
