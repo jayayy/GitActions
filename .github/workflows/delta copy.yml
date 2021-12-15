@@ -43,6 +43,8 @@ jobs:
         echo "${{ steps.commit.outputs.content }}" 
         echo $GITHUB_SHA >> deploymentCommit.txt
         cat deploymentCommit.txt
+        git config --global user.email "mehta.jay223@gmail.com"
+        git config --global user.name "JayMehta"
         git add deploymentCommit.txt
         git commit -m "pushed this commit id"
         git push
