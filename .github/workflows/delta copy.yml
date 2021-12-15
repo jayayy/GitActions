@@ -34,9 +34,11 @@ jobs:
     
     - name: Test Procedure
       run: |
-        cat ./deploymentCommit.txt
+        echo "::group::echo deployment"
         echo ${{cat ./deploymentCommit.txt}}
+        echo "::group::env variable"
         echo ${{env.commitid}}
+        echo "::group::github token"
         echo $GITHUB_SHA
         
 
