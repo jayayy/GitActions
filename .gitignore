@@ -20,7 +20,6 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-deploymentCommit.txt*
 # Dependency directories
 node_modules/
 
@@ -41,3 +40,4 @@ $RECYCLE.BIN/
 package
 destructivechanges
 src
+deploymentCommit123.txt
