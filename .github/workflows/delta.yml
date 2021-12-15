@@ -51,9 +51,10 @@ jobs:
     - name: Convert to Deploy Source
       run: sfdx force:source:deploy -x package/package.xml -u prod
         
-    - name: Status
-      run: sfdx force:source:deploy:report 
-      
+    - name: Storing commit SHA if deployment Successful
+      run: |
+        sfdx force:source:deploy:report | tee ./deploymentCommit.txt
+
 
       
       
