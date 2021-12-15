@@ -54,12 +54,15 @@ jobs:
     - name: Storing commit SHA if deployment Successful
       run: |
         sfdx force:source:deploy:report -u prod | tee ./deploymentCommit.txt
-        head -2 deploymentCommit.txt | tail -1
+        git config --global usser.email "mehta.jay223@gmail.com"
+        git config --global user.name "JayMehta"
         git status
         git add deploymentCommit.txt
         git commit -m "Last deployed Commit SHA updated"
         git push
 
+    - name: Storing commit SHA if deployment Successful
+      run: head -2 deploymentCommit.txt | tail -1
 
       
       
