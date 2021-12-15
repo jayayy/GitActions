@@ -33,21 +33,19 @@ jobs:
     # Authorize SF Org
 
     - name: Read branch.properties
-      id: version
+      id: commit
       uses: juliangruber/read-file-action@v1
       with:
-        path: ./build/version.properties
+        path: ./deploymentCommit.txt
 
     - name: Assign release version from version.properties to Env variable
       run: |
-        echo "${{ steps.version.outputs.content }}" >> $GITHUB_ENV  
+        echo "${{ steps.commit.outputs.content }}" >> $GITHUB_ENV  
       
     - name: Test Procedure
       id: vars
       run: |
-        echo "$(cat ./deploymentCommit.txt)"
-        echo "::group::env variable"
-        echo ${{env.commitid}}
+        echo ${{env.GITHUB_ENV}}
         echo "::group::github token"
         echo $GITHUB_SHA >> deploymentCommit.txt
         cat deploymentCommit.txt
