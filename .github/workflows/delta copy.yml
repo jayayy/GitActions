@@ -43,6 +43,9 @@ jobs:
         echo "${{ steps.commit.outputs.content }}" 
         echo $GITHUB_SHA >> deploymentCommit.txt
         cat deploymentCommit.txt
+        git add deploymentCommit.txt
+        git commit -m "pushed this commit id"
+        git push
         
       
 
