@@ -46,7 +46,7 @@ jobs:
       env: 
         commit: $(cat ./deploymentCommit.txt)
       run: |
-        echo commit
+        echo $commit
         sfdx sgd:source:delta --to HEAD --from $commit --output ./ --source=mytest/main/default/
         cat package/package.xml 
 
