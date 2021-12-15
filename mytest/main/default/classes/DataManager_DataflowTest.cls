@@ -8,6 +8,5 @@ public class DataManager_DataflowTest {
         //new comment 
         Document dataflowJson = dmDf.getNewDataflow('DTC_Sales');
         System.assertEquals('DTC_Sales_Testing', dataflowJson.Name);
-        adsasdada
     }
 }
