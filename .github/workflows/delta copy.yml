@@ -31,14 +31,20 @@ jobs:
     # Install SFDX CLI
     
     # Authorize SF Org
+
+    - name: Read file contents
+      id: read_file
+      uses: andstor/file-reader-action@v1
+      with:
+        path: "deploymentCommit.txt"
+
+    - name: File contents
+      run: echo "${ steps.read_file.outputs.contents }"
     
     - name: Test Procedure
       id: vars
       run: |
-        echo "::group::echo deployment"
-        echo ::set-output name=version::$(cat deploymentCommit.txt)
-        echo ${{ steps.vars.outputs.version }}
-        echo "cat ./deploymentCommit.txt"
+        echo "$(cat ./deploymentCommit.txt)"
         echo "::group::env variable"
         echo ${{env.commitid}}
         echo "::group::github token"
