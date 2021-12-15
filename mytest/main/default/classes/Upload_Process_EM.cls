@@ -2,7 +2,6 @@ public class Upload_Process_EM implements Queueable {
     private InsightsExternalData extData;
     
     // =========================================================================
-    //           Class Functions (constructor and execute)
     // =========================================================================
     
     public Upload_Process_EM(Id extDataId) {
