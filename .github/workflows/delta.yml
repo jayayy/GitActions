@@ -4,11 +4,11 @@ name: Delta Deploy
 on:
   push:
     branches: [ master ]
-    #paths: 'mytest/main/default/**'
+    paths: 'mytest/main/default/**'
 
   pull_request:
     branches: [ master ]
-    #paths: 'mytest/main/default/**'
+    paths: 'mytest/main/default/**'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -44,10 +44,10 @@ jobs:
     
     - name: Create Delta Changes Package
       env: 
-        commit: $(cat ./deploymentCommit.txt)
+        commitid: $(cat ./deploymentCommit.txt)
       run: |
         echo $commit
-        sfdx sgd:source:delta --to HEAD --from $commit --output ./ --source=mytest/main/default/
+        sfdx sgd:source:delta --to HEAD --from ${{env.commitid}} --output ./ --source=mytest/main/default/
         cat package/package.xml 
 
     # Deploy directly to Org; use alias as per org, no real implications

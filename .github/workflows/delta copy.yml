@@ -1,0 +1,47 @@
+name: Delta Deploy
+
+# Controls when the workflow will run
+on:
+  push:
+    branches: [ master ]
+    #paths: 'mytest/main/default/**'
+
+  pull_request:
+    branches: [ master ]
+    #paths: 'mytest/main/default/**'
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    steps:
+      # using fetch-depth = 0 to make the entire history of commits available
+    - uses: actions/checkout@v2
+      with: 
+        fetch-depth: 0
+
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with: 
+        node-version: '16'
+    
+    # Install SFDX CLI
+    
+    # Authorize SF Org
+    
+    - name: Test Procedure
+      env: 
+        commitid: $(cat ./deploymentCommit.txt)
+      run: |
+        echo $cat ./deploymentCommit.txt
+        echo $GITHUB_SHA
+
+    # Deploy directly to Org; use alias as per org, no real implications
+    
+
+
+      
+      
