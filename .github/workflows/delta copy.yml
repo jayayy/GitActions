@@ -33,13 +33,12 @@ jobs:
     # Authorize SF Org
     
     - name: Test Procedure
-      env: 
-        commitid: echo "cat ./deploymentCommit.txt" 
       run: |
+        cat ./deploymentCommit.txt
         echo ${{cat ./deploymentCommit.txt}}
         echo ${{env.commitid}}
         echo $GITHUB_SHA
-        cat ./deploymentCommit.txt
+        
 
     # Deploy directly to Org; use alias as per org, no real implications
     
