@@ -32,15 +32,16 @@ jobs:
     
     # Authorize SF Org
 
-    - name: Read file contents
-      id: read_file
-      uses: andstor/file-reader-action@v1
+    - name: Read branch.properties
+      id: version
+      uses: juliangruber/read-file-action@v1
       with:
-        path: "deploymentCommit.txt"
+        path: ./build/version.properties
 
-    - name: File contents
-      run: echo "${ steps.read_file.outputs.contents }"
-    
+    - name: Assign release version from version.properties to Env variable
+      run: |
+        echo "${{ steps.version.outputs.content }}" >> $GITHUB_ENV  
+      
     - name: Test Procedure
       id: vars
       run: |
