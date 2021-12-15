@@ -49,7 +49,7 @@ jobs:
 
     # Deploy directly to Org; use alias as per org, no real implications
     - name: Create Delta Package
-      run: sfdx force:source:deploy -x package/package.xml -u prod -s 
+      run: sfdx force:source:deploy -x package/package.xml -u prod -s mytest/main/default/
         
     - name: Storing commit SHA if deployment Successful
       run: |
