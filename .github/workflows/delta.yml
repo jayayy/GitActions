@@ -44,12 +44,12 @@ jobs:
     
     - name: Package Generator
       run: |
-        sfdx sgd:source:delta --to HEAD --from HEAD^ --output .
+        sfdx sgd:source:delta --to HEAD --from HEAD^ --output ./ --source=mytest/main/default/
         cat package/package.xml 
 
     # Deploy directly to Org; use alias as per org, no real implications
-    - name: Convert to Deploy Source
-      run: sfdx force:source:deploy -x package/package.xml -u prod
+    - name: Create Delta Package
+      run: sfdx force:source:deploy -x package/package.xml -u prod -s 
         
     - name: Storing commit SHA if deployment Successful
       run: |
