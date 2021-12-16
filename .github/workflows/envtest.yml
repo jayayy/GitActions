@@ -42,7 +42,7 @@ jobs:
       run: |
         echo "::group::.txt output"
         cat deploymentCommit.txt >> $GITHUB_ENV 
-        echo $commit
+        echo "${{ env.commit }}"
 
     
 
