@@ -62,7 +62,7 @@
             
             <layoutItems>
                 
-                <behavior>Edit</behavior>
+                <behavior>Readonly</behavior>
                 
                 <field>IsAgency__c</field>
                 
