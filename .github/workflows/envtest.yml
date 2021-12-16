@@ -43,7 +43,7 @@ jobs:
         COMMIT: hi
       run: |
         echo "::group::.txt output"
-        cat deploymentCommit.txt > $GITHUB_ENV
+        cat deploymentCommit.txt > $COMMIT
         echo $COMMIT
 
     
