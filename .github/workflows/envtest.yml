@@ -27,20 +27,10 @@ jobs:
       uses: actions/setup-node@v1
       with: 
         node-version: '16'
-    
-    # Install SFDX CLI
-    
-    # Authorize SF Org
 
-    - name: Read deploymentCommit.txt
-      id: commit
-      uses: juliangruber/read-file-action@v1
-      with:
-        path: ./deploymentCommit.txt
 
     - name: Print Commit ID Prev vs. Commit ID latest
       run: |
-        echo "::group::.txt output"
         cat deploymentCommit.txt
         cat deploymentCommit.txt >> $GITHUB_ENV 
         echo "${{ env.commit }}"
