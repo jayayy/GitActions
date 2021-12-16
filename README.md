@@ -19,3 +19,6 @@ Then pass that to generate teh delta package.xml
 
 **SonarQube Analysis via GitHub Actions - Documentation** :
 https://docs.sonarqube.org/latest/analysis/github-integration/
+
+**Last Successful Commit Id** :
+This file should be part of git ignore. It should be placed in a "CI/CD Config Folder"
