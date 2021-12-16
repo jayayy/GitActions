@@ -41,16 +41,7 @@ jobs:
     - name: Print Commit ID Prev vs. Commit ID latest
       run: |
         echo "::group::.txt output"
-        echo "${{ steps.commit.outputs.content }}" 
-        echo "::group::new file output"
-        echo $GITHUB_SHA > deploymentCommit.txt
-        cat deploymentCommit.txt
-        echo "::group::Committing new ID in .txt"
-        git config --global user.email "mehta.jay223@gmail.com"
-        git config --global user.name "JayMehta"
-        git add deploymentCommit.txt
-        git commit -m "pushed this commit id"
-        git push
+        cat deploymentCommit.txt > $GITHUB_ENV
         
       
 
