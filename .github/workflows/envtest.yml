@@ -40,16 +40,12 @@ jobs:
 
     - name: Print Commit ID Prev vs. Commit ID latest
       env: 
-        GITHUB_ENV: hi
+        COMMIT: hi
       run: |
         echo "::group::.txt output"
         cat deploymentCommit.txt > $GITHUB_ENV
-        echo $GITHUB_ENV
-      
+        echo $COMMIT
 
-        
-
-    # Deploy directly to Org; use alias as per org, no real implications
     
 
 
