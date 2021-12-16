@@ -52,7 +52,7 @@ jobs:
     - name: Deploy Package Changes
       run: sfdx force:source:deploy -x package/package.xml -u prod 
         
-    - name: Storing SHA if deployment Successful
+    - name: Store SHA 
       run: |
         sfdx force:source:deploy:report -u prod
         echo $GITHUB_SHA > ./deploymentCommit.txt
