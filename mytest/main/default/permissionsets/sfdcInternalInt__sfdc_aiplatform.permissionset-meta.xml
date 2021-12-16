@@ -6,7 +6,7 @@
     
     <fieldPermissions>
         
-        <editable>false</editable>
+        <editable>true</editable>
         
         <field>Account.AccountNumber</field>
         
