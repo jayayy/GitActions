@@ -45,7 +45,7 @@ jobs:
     
     - name: Create Delta Changes Package
       run: |
-        sfdx sgd:source:delta --output ./ --source=mytest/main/default/ --to HEAD --from $(env.commit) 
+        sfdx sgd:source:delta --output ./ --source=mytest/main/default/ --to HEAD --from ${{env.commit}} 
         cat package/package.xml 
 
     # Deploy directly to Org; use alias as per org, no real implications
@@ -54,14 +54,9 @@ jobs:
         
     - name: Store SHA 
       run: |
-        sfdx force:source:deploy:report -u prod
         echo $GITHUB_SHA > ./deploymentCommit.txt
-        git config --global usser.email "mehta.jay223@gmail.com"
-        git config --global user.name "JayMehta"
-        git status
-        git add deploymentCommit.txt
-        git commit -m "Last deployed Commit SHA updated"
-        git push
+        git config --global user.email "mehta.jay223@gmail.com"; git config --global user.name "JayMehta"
+        git add deploymentCommit.txt ; git commit -m "Last deployed Commit SHA updated"; git push
 
 
 
