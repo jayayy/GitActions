@@ -27,7 +27,14 @@ jobs:
       uses: actions/setup-node@v1
       with: 
         node-version: '16'
-
+    - name: Set the value
+      id: step_one
+      run: |
+        echo "action_state=yellow" >> $GITHUB_ENV
+    - name: Use the value
+      id: step_two
+      run: |
+        echo "${{ env.action_state }}" # This will output 'yellow'
 
     - name: Print Commit ID Prev vs. Commit ID latest
       run: |
