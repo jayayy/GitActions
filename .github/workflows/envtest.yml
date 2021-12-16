@@ -42,6 +42,18 @@ jobs:
         cat deploymentCommit.txt >> $GITHUB_ENV 
         echo "${{ env.commit }}"
 
+    # Install SFDX CLI
+    - name: Install SFDX CLI
+      run: |
+        npm install sfdx-cli --global
+        echo y | sfdx plugins:install sfdx-git-delta
+
+    # Install SFDX CLI
+    - name: Test
+      run: |
+        sfdx sgd:source:delta --output ./ --to HEAD --from $(cat deploymentCommit.txt)
+        cat package/package.xml
+
     
 
 
