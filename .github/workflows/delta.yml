@@ -27,12 +27,6 @@ jobs:
       uses: actions/setup-node@v1
       with: 
         node-version: '16'
-
-    - name: Read deploymentCommit.txt
-      id: commit
-      uses: juliangruber/read-file-action@v1
-      with:
-        path: ./deploymentCommit.txt
     
     # Install SFDX CLI
     - name: Install SFDX CLI
@@ -50,7 +44,7 @@ jobs:
     
     - name: Create Delta Changes Package
       run: |
-        sfdx sgd:source:delta --output ./ --source=mytest/main/default/ --to HEAD --from ${{ steps.commit.outputs.content }} 
+        sfdx sgd:source:delta --output ./ --source=mytest/main/default/ --to HEAD --from $(cat deploymentCommit.txt) 
         cat package/package.xml 
 
     # Deploy directly to Org; use alias as per org, no real implications
