@@ -15,3 +15,7 @@ Next step: Linking multiple orgs with the same repository. Reading through githu
 **Identifying the last successful commit Id** :
 Using environment variables, github_sha, pasted this to a .txt file maintained in the repo, as a pointer as to which commit was deployed successfully.
 Then pass that to generate teh delta package.xml 
+
+
+**SonarQube Analysis via GitHub Actions - Documentation** :
+https://docs.sonarqube.org/latest/analysis/github-integration/
