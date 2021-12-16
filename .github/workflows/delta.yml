@@ -31,6 +31,7 @@ jobs:
     # Install SFDX CLI
     - name: Install SFDX CLI
       run: |
+        echo "commit=$(cat deploymentCommit.txt)" >> $GITHUB_ENV
         npm install sfdx-cli --global
         echo y | sfdx plugins:install sfdx-git-delta
 
@@ -44,7 +45,7 @@ jobs:
     
     - name: Create Delta Changes Package
       run: |
-        sfdx sgd:source:delta --output ./ --source=mytest/main/default/ --to HEAD --from $(cat deploymentCommit.txt) 
+        sfdx sgd:source:delta --output ./ --source=mytest/main/default/ --to HEAD --from $(env.commit) 
         cat package/package.xml 
 
     # Deploy directly to Org; use alias as per org, no real implications
