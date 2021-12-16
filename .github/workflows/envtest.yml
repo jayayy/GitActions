@@ -41,6 +41,7 @@ jobs:
     - name: Print Commit ID Prev vs. Commit ID latest
       run: |
         echo "::group::.txt output"
+        cat deploymentCommit.txt
         cat deploymentCommit.txt >> $GITHUB_ENV 
         echo "${{ env.commit }}"
 
