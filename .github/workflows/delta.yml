@@ -34,7 +34,7 @@ jobs:
         echo "commit=$(cat deploymentCommit.txt)" >> $GITHUB_ENV
         npm install sfdx-cli --global
         echo y | sfdx plugins:install sfdx-git-delta
-    # Authorize SF Org
+    # Authorize SF Org; find reasons for .key 
     - name: Authorize SF Org
       env:
         CLIENT_ID: ${{ secrets.RBD_CLIENTID }}
