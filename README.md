@@ -22,3 +22,8 @@ https://docs.sonarqube.org/latest/analysis/github-integration/
 
 **Last Successful Commit Id** :
 This file should be part of git ignore. It should be placed in a "CI/CD Config Folder"
+
+
+accenture1101 -> FULL (tableau)
+specialistsuperbadge -> master (tableau)
+trailhead org -> RBD
