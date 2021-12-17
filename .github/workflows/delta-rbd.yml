@@ -44,7 +44,7 @@ jobs:
     
     - name: Create Delta Changes Package
       run: |
-        sfdx sgd:source:delta --output ./ --to HEAD --from HEAD~2 --source ./force-app
+        sfdx sgd:source:delta --output ./ --to HEAD --from HEAD^ --source ./force-app
         cat package/package.xml 
     # Deploy directly to Org; use alias as per set in the auth process
     - name: Deploy Package Changes
