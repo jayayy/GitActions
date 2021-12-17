@@ -40,15 +40,15 @@ jobs:
         CLIENT_ID: ${{ secrets.RBD_CLIENTID }}
         USERNAME: ${{ secrets.RBD_LOGININSTANCE }}
         INSTANCE_URL: ${{ secrets.RBD_USERNAME }}
-      run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile ./buildfiles/server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
+      run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile ./buildfiles/server.key --username $USERNAME --instanceurl $INSTANCE_URL -a rbd
     
     - name: Create Delta Changes Package
       run: |
         sfdx sgd:source:delta --output ./ --source=mytest/main/default/ --to HEAD --from HEAD^ 
         cat package/package.xml 
-    # Deploy directly to Org; use alias as per org, no real implications
+    # Deploy directly to Org; use alias as per set in the auth process
     - name: Deploy Package Changes
-      run: sfdx force:source:deploy -x package/package.xml -u prod 
+      run: sfdx force:source:deploy -x package/package.xml -u rbd 
         
     - name: Store SHA 
       run: |
