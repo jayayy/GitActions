@@ -4,11 +4,11 @@ name: Delta Deploy - RBD
 on:
   push:
     branches: [ RBD ]
-    #paths: 'mytest/main/default/**'
+    paths: 'force-app/main/default/**'
 
   pull_request:
     branches: [ RBD ]
-    #paths: 'mytest/main/default/**'
+    paths: 'force-app/main/default/**'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
