@@ -38,8 +38,8 @@ jobs:
     - name: Authorize SF Org
       env:
         CLIENT_ID: ${{ secrets.RBD_CLIENTID }}
-        USERNAME: ${{ secrets.RBD_LOGININSTANCE }}
-        INSTANCE_URL: ${{ secrets.RBD_USERNAME }}
+        INSTANCE_URL: ${{ secrets.RBD_LOGININSTANCE }}
+        USERNAME: ${{ secrets.RBD_USERNAME }}
       run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile ./buildfiles/server.key --username $USERNAME --instanceurl $INSTANCE_URL -a rbd
     
     - name: Create Delta Changes Package
