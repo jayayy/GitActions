@@ -3,12 +3,12 @@ name: Delta Deploy - Full
 # Controls when the workflow will run
 on:
   push:
-    branches: [ master ]
-    paths: 'mytest/main/default/**'
+    branches: [ FULL ]
+    paths: 'force-app/main/default/**'
 
   pull_request:
-    branches: [ master ]
-    paths: 'mytest/main/default/**'
+    branches: [ FULL ]
+    paths: 'force-app/main/default/**'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -38,19 +38,19 @@ jobs:
     # Authorize SF Org
     - name: Authorize SF Org
       env:
-        CLIENT_ID: ${{ secrets.SALESFORCEPRODCLIENTID }}
-        USERNAME: ${{ secrets.SALESFORCEPRODUSERNAME }}
-        INSTANCE_URL: ${{ secrets.SALESFORCEPRODINSTANCEURL }}
-      run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile ./buildfiles/server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
+        CLIENT_ID: ${{ secrets.FULL_CLIENTID }}
+        USERNAME: ${{ secrets.FULL_USERNAME }}
+        INSTANCE_URL: ${{ secrets.FULL_LOGININSTANCE}}
+      run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile ./buildfiles/server.key --username $USERNAME --instanceurl $INSTANCE_URL -a full
     
     - name: Create Delta Changes Package
       run: |
-        sfdx sgd:source:delta --output ./ --source=mytest/main/default/ --to HEAD --from ${{env.commit}} 
+        sfdx sgd:source:delta --output ./ --to HEAD --from HEAD^ 
         cat package/package.xml 
 
     # Deploy directly to Org; use alias as per org, no real implications
     - name: Deploy Package Changes
-      run: sfdx force:source:deploy -x package/package.xml -u prod 
+      run: sfdx force:source:deploy -x package/package.xml -u full 
         
     - name: Store SHA 
       run: |
