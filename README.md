@@ -26,4 +26,4 @@ This file should be part of git ignore. It should be placed in a "CI/CD Config F
 
 accenture1101 -> FULL (tableau)
 specialistsuperbadge -> master (tableau)
-trailhead org -> RBD
+trailhead: lwc -> RBD
