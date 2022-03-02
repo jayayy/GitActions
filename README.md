@@ -22,3 +22,5 @@ https://docs.sonarqube.org/latest/analysis/github-integration/
 
 **Last Successful Commit Id** :
 This file should be part of git ignore. It should be placed in a "CI/CD Config Folder"
+
+To add the encrypted certificates
