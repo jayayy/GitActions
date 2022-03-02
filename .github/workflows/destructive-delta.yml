@@ -4,8 +4,6 @@ name: Test (Manually triggered)
 on:
   workflow_dispatch: 
 
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
@@ -22,15 +20,31 @@ jobs:
       uses: actions/setup-node@v1
       with: 
         node-version: '16'
-
-    - name: Print Commit ID Prev vs. Commit ID latest
+    
+    # Install SFDX CLI
+    - name: Install SFDX CLI
       run: |
-        cat deploymentCommit.txt
-        echo "commit=$(cat deploymentCommit.txt)" >> $GITHUB_ENV 
-
-    - name: Print Commit ID Prev vs. Commit ID latest
-      run: echo "${{ env.commit }}"
-
-
-      
-      
+        echo "commit=$(cat deploymentCommit.txt)" >> $GITHUB_ENV
+        npm install sfdx-cli --global
+        echo y | sfdx plugins:install sfdx-git-delta
+    # Authorize SF Org
+    - name: Authorize SF Org
+      env:
+        CLIENT_ID: ${{ secrets.SALESFORCEPRODCLIENTID }}
+        USERNAME: ${{ secrets.SALESFORCEPRODUSERNAME }}
+        INSTANCE_URL: ${{ secrets.SALESFORCEPRODINSTANCEURL }}
+      run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile ./buildfiles/server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
+    
+    - name: Create Delta Changes Package
+      run: |
+        sfdx sgd:source:delta --output ./ --source=mytest/main/default/ --to HEAD --from ${{env.commit}}
+        cat destructiveChanges/destructiveChanges.xml
+    # Deploy directly to Org; use alias as per org, no real implications
+    - name: Deploy Package Changes
+      run: sfdx force:source:deploy -x destructiveChanges/destructiveChanges.xml -u prod --predestructivechanges -g
+        
+    - name: Store SHA 
+      run: |
+        echo $GITHUB_SHA > ./deploymentCommit.txt
+        git config --global user.email "mehta.jay223@gmail.com"; git config --global user.name "JayMehta"
+        git add deploymentCommit.txt ; git commit -m "Last deployed Commit SHA updated"; git push
