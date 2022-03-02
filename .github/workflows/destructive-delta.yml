@@ -1,4 +1,4 @@
-name: Test (Manually triggered)
+name: Destructive Delta
 
 # Controls when the workflow will run
 on:
