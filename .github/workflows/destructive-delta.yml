@@ -41,7 +41,7 @@ jobs:
         cat destructiveChanges/destructiveChanges.xml
     # Deploy directly to Org; use alias as per org, no real implications
     - name: Deploy Package Changes
-      run: sfdx force:source:deploy -x destructiveChanges/destructiveChanges.xml -u prod --postdestructivechanges -g
+      run: sfdx force:source:deploy -x destructiveChanges/destructiveChanges.xml -u prod --postdestructivechanges --ignorewarnings
         
     - name: Store SHA 
       run: |
