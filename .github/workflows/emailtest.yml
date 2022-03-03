@@ -22,19 +22,19 @@ jobs:
     
     - name: Send mail
       uses: dawidd6/action-send-mail@v3
-        with:
+      with:
           # Required mail server address:
           server_address: smtp.gmail.com
           # Required mail server port:
           server_port: 465
           # Optional (recommended): mail server username:
-          username: ${{secrets.MAIL_USERNAME}}
+          username: mehta.jay223@gmail.com
           # Optional (recommended) mail server password:
-          password: ${{secrets.MAIL_PASSWORD}}
+          password: jay1801@#1234
           # Required mail subject:
           subject: Github Actions job result
           # Required recipients' addresses:
-          to: obiwan@example.com,yoda@example.com
+          to: jay.deepak.mehta@accenture.com
           # Required sender full name (address can be skipped):
           from: Luke Skywalker # <user@example.com>
           # Optional whether this connection use TLS (default is true if server_port is 465)
