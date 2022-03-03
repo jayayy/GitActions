@@ -23,7 +23,7 @@ jobs:
     - name: Echo test
       run: |
         echo ${{github.actor}}
-        echo ${{github.event.pusher.name}}
+        echo ${{github.event.pusher.email}}
         
 #     - name: Send mail
 #       uses: dawidd6/action-send-mail@v3
