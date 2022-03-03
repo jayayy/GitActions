@@ -25,6 +25,11 @@ jobs:
         echo ${{github.actor}}
         echo ${{github.event.pusher.email}}
         echo "The email of the pusher: ${{ github.event.pusher.email }}"
+        
+    - name: View the github context
+      run: echo "$GITHUB_CONTEXT"
+      env:
+         GITHUB_CONTEXT: ${{ toJson(github) }}
 #     - name: Send mail
 #       uses: dawidd6/action-send-mail@v3
 #       with:
