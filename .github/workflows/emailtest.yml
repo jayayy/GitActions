@@ -30,7 +30,7 @@ jobs:
           # Optional (recommended): mail server username:
           username: mehta.jay223@gmail.com
           # Optional (recommended) mail server password:
-          password: jay1801@#1234
+          password: redacted
           # Required mail subject:
           subject: Github Actions job result
           # Required recipients' addresses:
