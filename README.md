@@ -23,4 +23,8 @@ https://docs.sonarqube.org/latest/analysis/github-integration/
 **Last Successful Commit Id** :
 This file should be part of git ignore. It should be placed in a "CI/CD Config Folder"
 
-To add the encrypted certificates
+openssl enc -aes-256-cbc -k 54321 -P -md sha1 -nosalt -- to generate the key & iv
+
+openssl enc -aes-256-cbc -in server.key -out server.key.enc -base64 -K 348162101FC6F7E624681B7400B085EEAC6DF7BD357D4248B52330019C50E6FA-iv BFD3C734366D1A974ECD7FD530D8B489 -- use genrated key & iv to encrypt and upload it in the repo; paste the key and iv values as secrets
+
+openssl enc -nosalt -aes-256-cbc -d -in buildfiles/server.key.enc -out server.key -base64 -K ${{secrets.PRODKEY}} -iv ${{secrets.PRODIV}}  -- use this to decrypt and use the decrypted .key file as authenticator
