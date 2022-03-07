@@ -1,7 +1,7 @@
 import { LightningElement } from 'lwc';
 export default class BikeCard extends LightningElement {
    name = 'Electra X4';
-   description = 'A sweet bike built for comfort.';
+   description = 'A sweet bike with best in calss specs lol built for comfort.';
    category = 'Mountain';
    material = 'Steel';
    price = '$2,700';
