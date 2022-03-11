@@ -47,7 +47,9 @@ jobs:
 
     # Deploy directly to Org; use alias as per org
     - name: Validate Package Changes
-      run: sfdx force:source:deploy -x package/package.xml -u prod -c
+      run: |
+        sfdx force:source:deploy -x package/package.xml -u prod -c >> xoxo
+        echo xoxo
 
     # Deploy directly to Org; use alias as per org
     - name: Deploy Package Changes
