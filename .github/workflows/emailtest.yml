@@ -36,7 +36,7 @@ jobs:
     
     - name: Create Delta Changes Package
       run: |
-        sfdx sgd:source:delta --output ./ --source=mytest/main/default/ --to HEAD --from HEAD^1 
+        sfdx sgd:source:delta --output ./ --source=mytest/main/default/ --to HEAD --from HEAD^2 
         cat package/package.xml 
     
     - name: Test Job
