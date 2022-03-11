@@ -36,11 +36,10 @@ jobs:
     
     - name: Create Delta Changes Package
       run: |
-        sfdx sgd:source:delta --output ./ --source=mytest/main/default/ --to HEAD --from ${{env.commit}} 
+        sfdx sgd:source:delta --output ./ --source=mytest/main/default/ --to HEAD --from HEAD~1 
         cat package/package.xml 
-
     
-    - name: Test  
+    - name: Test Job
       run: | 
         sfdx force:source:deploy -x package/package.xml -u prod -c >> xoxo
         echo xoxo        
