@@ -19,35 +19,60 @@ jobs:
       uses: actions/setup-node@v1
       with: 
         node-version: '16'
-    
-    - name: Echo test
+
+    - name: Installations and Support Tasks
       run: |
-        echo ${{github.actor}}
-        echo ${{github.event.pusher.email}}
-        echo "The email of the pusher: ${{ github.event.pusher.email }}"
-        
-    - name: View the github context
-      run: echo "$GITHUB_CONTEXT"
+        echo "commit=$(cat deploymentCommit.txt)" >> $GITHUB_ENV
+        npm install sfdx-cli --global
+        echo y | sfdx plugins:install sfdx-git-delta
+        openssl enc -nosalt -aes-256-cbc -d -in buildfiles/server.key.enc -out server.key -base64 -K ${{secrets.PRODKEY}} -iv ${{secrets.PRODIV}}
+    # Authorize SF Org
+    - name: Authorize Org
       env:
-         GITHUB_CONTEXT: ${{ toJson(github) }}
-#     - name: Send mail
-#       uses: dawidd6/action-send-mail@v3
-#       with:
-#           # Required mail server address:
-#           server_address: smtp.gmail.com
-#           # Required mail server port:
-#           server_port: 465
-#           # Optional (recommended): mail server username:
-#           username: mehta.jay223@gmail.com
-#           # Optional (recommended) mail server password:
-#           password: redacted
-#           # Required mail subject:
-#           subject: Github Actions job result
-#           # Required recipients' addresses:
-#           to: jay.deepak.mehta@accenture.com
-#           # Required sender full name (address can be skipped):
-#           from: Luke Skywalker # <user@example.com>
-#           # Optional whether this connection use TLS (default is true if server_port is 465)
-#           secure: true
-#           # Optional plain body:
-#           body: Build job of ${{github.repository}} completed successfully!
+        CLIENT_ID: ${{ secrets.SALESFORCEPRODCLIENTID }}
+        USERNAME: ${{ secrets.SALESFORCEPRODUSERNAME }}
+        INSTANCE_URL: ${{ secrets.SALESFORCEPRODINSTANCEURL }}
+      run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
+    
+    - name: Create Delta Changes Package
+      run: |
+        sfdx sgd:source:delta --output ./ --source=mytest/main/default/ --to HEAD --from ${{env.commit}} 
+        cat package/package.xml 
+
+    
+    - name: Test  
+      run: | 
+        sfdx force:source:deploy -x package/package.xml -u prod -c >> xoxo
+        echo xoxo        
+
+#     - name: Echo test
+#       run: |
+#         echo ${{github.actor}}
+#         echo ${{github.event.pusher.email}}
+#         echo "The email of the pusher: ${{ github.event.pusher.email }}"
+        
+#     - name: View the github context
+#       run: echo "$GITHUB_CONTEXT"
+#       env:
+#          GITHUB_CONTEXT: ${{ toJson(github) }}
+# #     - name: Send mail
+# #       uses: dawidd6/action-send-mail@v3
+# #       with:
+# #           # Required mail server address:
+# #           server_address: smtp.gmail.com
+# #           # Required mail server port:
+# #           server_port: 465
+# #           # Optional (recommended): mail server username:
+# #           username: mehta.jay223@gmail.com
+# #           # Optional (recommended) mail server password:
+# #           password: redacted
+# #           # Required mail subject:
+# #           subject: Github Actions job result
+# #           # Required recipients' addresses:
+# #           to: jay.deepak.mehta@accenture.com
+# #           # Required sender full name (address can be skipped):
+# #           from: Luke Skywalker # <user@example.com>
+# #           # Optional whether this connection use TLS (default is true if server_port is 465)
+# #           secure: true
+# #           # Optional plain body:
+# #           body: Build job of ${{github.repository}} completed successfully!
