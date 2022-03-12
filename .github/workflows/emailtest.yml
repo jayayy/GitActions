@@ -42,7 +42,7 @@ jobs:
     - name: Test Job
       run: | 
         sfdx force:source:deploy -x package/package.xml -u prod -c > xoxo.txt
-        cat xoxo.txt | head -2 | tail -1 
+        cat xoxo.txt | head -2 | tail -1 | cut -c12-30
         
 #     - name: Echo test
 #       run: |
