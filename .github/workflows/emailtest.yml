@@ -41,14 +41,15 @@ jobs:
     
     - name: Test Job
       run: | 
-        sfdx force:source:deploy -x package/package.xml -u prod -c > xoxo.txt
-        cat xoxo.txt | head -2 | tail -1 | cut -c12-30
+        sfdx force:source:deploy -x package/package.xml -u prod -c | head -2 | tail -1 | cut -c12-30 > deployid.txt
+        echo "jobid=$(cat deployid.txt)" >> $GITHUB_ENV
         
-#     - name: Echo test
-#       run: |
-#         echo ${{github.actor}}
-#         echo ${{github.event.pusher.email}}
-#         echo "The email of the pusher: ${{ github.event.pusher.email }}"
+    - name: Echo test
+      run: |
+        echo $${{env.jobid}}
+        echo ${{github.actor}}
+        echo ${{github.event.pusher.email}}
+        echo "The email of the pusher: ${{ github.event.pusher.email }}"
         
 #     - name: View the github context
 #       run: echo "$GITHUB_CONTEXT"
