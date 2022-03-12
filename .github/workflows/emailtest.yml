@@ -41,8 +41,8 @@ jobs:
     
     - name: Test Job
       run: | 
-        sfdx force:source:deploy -x package/package.xml -u prod -c >> xoxo
-        echo xoxo        
+        sfdx force:source:deploy -x package/package.xml -u prod -c > xoxo.txt
+        cat xoxo.txt
 
 #     - name: Echo test
 #       run: |
