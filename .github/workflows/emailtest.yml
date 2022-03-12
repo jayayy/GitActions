@@ -47,6 +47,7 @@ jobs:
     - name: Echo test
       run: |
         echo ${{env.jobid}}
+        echo "$GITHUB_CONTEXT"
         
 #     - name: View the github context
 #       run: echo "$GITHUB_CONTEXT"
