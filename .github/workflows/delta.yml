@@ -52,21 +52,21 @@ jobs:
     - name: remove this block
       run: |
         echo "JAYISGREAT"
-        echo ${{endsWith(env.precednt,'</version>') || endsWith(env.destprecednt,'</version>')}}
+        echo ${{!endsWith(env.precednt,'</version>') && !endsWith(env.destprecednt,'</version>')}}
     # Deploy directly to Org; use alias as per org
     - name: Validate Package Changes
-      if: ${{endsWith(env.precednt,'</version>') || endsWith(env.destprecednt,'</version>')}}
+      if:  ${{!endsWith(env.precednt,'</version>') && !endsWith(env.destprecednt,'</version>')}}
       run: |
         sfdx force:source:deploy -x package/package.xml --postdestructivechanges destructiveChanges/destructiveChanges.xml -u prod -c | head -2 | tail -1 | cut -c12-30 > deployid.txt
         echo "jobid=$(cat deployid.txt)" >> $GITHUB_ENV
 
     # Deploy directly to Org; use alias as per org
     - name: Deploy Package Changes
-      if: ${{endsWith(env.precednt,'</version>') || endsWith(env.destprecednt,'</version>')}}
+      if:  ${{!endsWith(env.precednt,'</version>') && !endsWith(env.destprecednt,'</version>')}}
       run: sfdx force:source:deploy -x package/package.xml -u prod -q ${{env.jobid}}
         
     - name: Store SHA 
-      if: ${{endsWith(env.precednt,'</version>') || endsWith(env.destprecednt,'</version>')}}
+      if:  ${{!endsWith(env.precednt,'</version>') && !endsWith(env.destprecednt,'</version>')}}
       run: |
         echo $GITHUB_SHA > ./deploymentCommit.txt
         git config --global user.email "mehta.jay223@gmail.com"; git config --global user.name "JayMehta"
