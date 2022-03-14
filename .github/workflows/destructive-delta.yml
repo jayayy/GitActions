@@ -27,13 +27,14 @@ jobs:
         echo "commit=$(cat deploymentCommit.txt)" >> $GITHUB_ENV
         npm install sfdx-cli --global
         echo y | sfdx plugins:install sfdx-git-delta
+        openssl enc -nosalt -aes-256-cbc -d -in buildfiles/server.key.enc -out server.key -base64 -K ${{secrets.PRODKEY}} -iv ${{secrets.PRODIV}}
     # Authorize SF Org
     - name: Authorize SF Org
       env:
         CLIENT_ID: ${{ secrets.SALESFORCEPRODCLIENTID }}
         USERNAME: ${{ secrets.SALESFORCEPRODUSERNAME }}
         INSTANCE_URL: ${{ secrets.SALESFORCEPRODINSTANCEURL }}
-      run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile ./buildfiles/server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
+      run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
     
     - name: Create Delta Changes Package
       run: |
