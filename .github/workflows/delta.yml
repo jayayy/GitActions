@@ -48,12 +48,12 @@ jobs:
     # Deploy directly to Org; use alias as per org
     - name: Validate Package Changes
       run: |
-        sfdx force:source:deploy -x package/package.xml -u prod -c >> xoxo
-        echo xoxo
+        sfdx force:source:deploy -x package/package.xml -u prod -c | head -2 | tail -1 | cut -c12-30 > deployid.txt
+        echo "jobid=$(cat deployid.txt)" >> $GITHUB_ENV
 
     # Deploy directly to Org; use alias as per org
     - name: Deploy Package Changes
-      run: sfdx force:source:deploy -x package/package.xml -u prod 
+      run: sfdx force:source:deploy -x package/package.xml -u prod -j ${{env.jobid}}
         
     - name: Store SHA 
       run: |
