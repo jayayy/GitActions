@@ -42,13 +42,13 @@ jobs:
         cat packageline3.txt
         echo "precedent=$(cat packageline3.txt)" >> $GITHUB_ENV
 
-    if: contains('<version>',env.precedent)
-    steps:
     - name: Test if package is Empty
+      if: contains('<version>',env.precednt)
       run: | 
         echo "Package is empty" 
 
     - name: Test if package is Empty
+      if: false == contains('<version>',env.precednt)
       run: | 
         echo "Package is not empty"            
 
