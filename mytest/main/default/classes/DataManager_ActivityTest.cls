@@ -1,7 +1,7 @@
 @isTest
 public class DataManager_ActivityTest {
     @isTest static void testQueueable() {
-        // test 123 ggygyyg  lplppppppppppppppppppppppppppppppppppppppppppppp
+        // test 123 
         DataManager_TestUtils.initAccs();
         DataManager_TestUtils.initOpps();
 		
