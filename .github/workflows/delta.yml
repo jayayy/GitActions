@@ -53,7 +53,7 @@ jobs:
 
     # Deploy directly to Org; use alias as per org
     - name: Deploy Package Changes
-      run: sfdx force:source:deploy -x package/package.xml -u prod -j ${{env.jobid}}
+      run: sfdx force:source:deploy -x package/package.xml -u prod -q ${{env.jobid}}
         
     - name: Store SHA 
       run: |
