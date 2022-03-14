@@ -1,11 +1,11 @@
-name: Email test
+name: Test
 
 on:
   workflow_dispatch:
   
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  test:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -36,18 +36,22 @@ jobs:
     
     - name: Create Delta Changes Package
       run: |
-        sfdx sgd:source:delta --output ./ --source=mytest/main/default/ --to HEAD --from fa7add3feb80cb2de57c0a880654352feb81b3e4
+        sfdx sgd:source:delta --output ./ --source=mytest/main/default/ --to HEAD --from ${{env.commit}}
         cat package/package.xml 
-    
-    - name: Test Job
+        cat package/package.xml | head -3 | tail -1 > packageline3.txt
+        echo "precedent=$(cat packageline3.txt)" >> $GITHUB_ENV
+
+    if: ${{env.precedent}} == "<version>52.0</version>"
+    steps:
+    - name: Test if package is Empty
       run: | 
-        sfdx force:source:deploy -x package/package.xml -u prod -c | head -2 | tail -1 | cut -c12-30 > deployid.txt
-        echo "jobid=$(cat deployid.txt)" >> $GITHUB_ENV
-        
-    - name: Echo test
-      run: |
-        echo ${{env.jobid}}
-        echo "$GITHUB_CONTEXT"
+        echo "PAckage is not empty" 
+
+    if: ${{env.precedent}} != "<version>52.0</version>"
+    steps:
+    - name: Test if package is Empty
+      run: | 
+        echo "Package is empty"     
         
 #     - name: View the github context
 #       run: echo "$GITHUB_CONTEXT"
