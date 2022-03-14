@@ -46,8 +46,7 @@ jobs:
       run: | 
         echo "PAckage is not empty" 
 
-    if: ${{env.precedent}} != "<version>52.0</version>"
-    steps:
+      if: ${{env.precedent}} != "<version>52.0</version>"
     - name: Test if package is Empty
       run: | 
         echo "Package is empty"     
