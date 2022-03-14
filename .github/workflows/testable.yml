@@ -41,8 +41,7 @@ jobs:
         cat package/package.xml | head -3 | tail -1 > packageline3.txt
         echo "precedent=$(cat packageline3.txt)" >> $GITHUB_ENV
 
-    if: ${{env.precedent}} == "<version>52.0</version>"
-    steps:
+      if: ${{env.precedent}} == "<version>52.0</version>"
     - name: Test if package is Empty
       run: | 
         echo "PAckage is not empty" 
