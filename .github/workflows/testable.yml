@@ -44,12 +44,12 @@ jobs:
 
 
     - name: Empty?
-      if: endsWith(env.precednt,'</version>')
+      if: ${{endsWith(env.precednt,'</version>')}}
       run: | 
         echo "Package is empty" 
 
     - name: Empty Not?
-      if: false == endsWith(env.precednt,'</version>')
+      if: ${{false == endsWith(env.precednt,'</version>')}}
       run: | 
         echo "Package is not empty"            
 
