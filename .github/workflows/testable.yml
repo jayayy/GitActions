@@ -51,7 +51,7 @@ jobs:
       if: false == contains(env.precednt,'<version>')
       run: | 
         echo "Package is empty"    
-        echo  contains(env.precednt,'<version>')
+        echo ${{contains(env.precednt,'<version>')}}
         
 #     - name: View the github context
 #       run: echo "$GITHUB_CONTEXT"
