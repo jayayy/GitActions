@@ -49,15 +49,12 @@ jobs:
         cat destructiveChanges/destructiveChanges.xml | head -3 | tail -1 > destpackageline3.txt
         echo "precedent=$(cat packageline3.txt)" >> $GITHUB_ENV
         echo "destprecedent=$(cat destpackageline3.txt)" >> $GITHUB_ENV
-    - name: remove this block
-      run: |
-        echo "JAYISGREAT"
-        echo ${{!endsWith(env.precednt,'</version>') && !endsWith(env.destprecednt,'</version>')}}
-    # Deploy directly to Org; use alias as per org
+
+    # Validate to Org; use alias as per org
     - name: Validate Package Changes
       if:  ${{!endsWith(env.precednt,'</version>') && !endsWith(env.destprecednt,'</version>')}}
       run: |
-        sfdx force:source:deploy -x package/package.xml --postdestructivechanges destructiveChanges/destructiveChanges.xml -u prod -c | head -2 | tail -1 | cut -c12-30 > deployid.txt
+        sfdx force:source:deploy -x package/package.xml --postdestructivechanges destructiveChanges/destructiveChanges.xml -u prod -c -l RunAllTestsInOrg | head -2 | tail -1 | cut -c12-30 > deployid.txt
         echo "jobid=$(cat deployid.txt)" >> $GITHUB_ENV
 
     # Deploy directly to Org; use alias as per org
