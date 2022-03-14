@@ -1,9 +1,7 @@
 name: Test
 
 on:
-  push:
-    branches: [ master ]
-  
+  workflow-dispatch:
   
 jobs:
   # This workflow contains a single job called "build"
@@ -44,17 +42,16 @@ jobs:
         cat packageline3.txt
         echo "precedent=$(cat packageline3.txt)" >> $GITHUB_ENV
 
+    steps:
+    if: contains('<version>',env.precedent)
     - name: Test if package is Empty
-      if: contains('<version>',env.precednt)
       run: | 
-        echo "Package is not empty" 
+        echo "Package is empty" 
 
     - name: Test if package is Empty
-      if: false == contains('<version>',env.precednt)
       run: | 
-        echo "Package is empty"    
-        echo ${{contains('<version>',env.precednt)}}
-        
+        echo "Package is not empty"            
+
 #     - name: View the github context
 #       run: echo "$GITHUB_CONTEXT"
 #       env:

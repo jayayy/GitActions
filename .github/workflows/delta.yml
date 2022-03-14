@@ -44,6 +44,8 @@ jobs:
       run: |
         sfdx sgd:source:delta --output ./ --source=mytest/main/default/ --to HEAD --from ${{env.commit}} 
         cat package/package.xml 
+        cat package/package.xml | head -3 | tail -1 > packageline3.txt
+        echo "precedent=$(cat packageline3.txt)" >> $GITHUB_ENV
 
     # Deploy directly to Org; use alias as per org
     - name: Validate Package Changes
