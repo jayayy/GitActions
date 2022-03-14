@@ -48,7 +48,6 @@ jobs:
 
       if: "!contains(env.precedent,'<version>')"
     - name: Test if package is Empty
-    - name: Test if package is Empty
       run: | 
         echo "Package is empty"     
         
