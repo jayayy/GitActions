@@ -50,7 +50,9 @@ jobs:
         echo "precedent=$(cat packageline3.txt)" >> $GITHUB_ENV
         echo "destprecedent=$(cat destpackageline3.txt)" >> $GITHUB_ENV
     - name: remove this block
-      run: echo "JAYISGREAT"
+      run: |
+        echo "JAYISGREAT"
+        echo ${{endsWith(env.precednt,'</version>') || endsWith(env.destprecednt,'</version>')}}
     # Deploy directly to Org; use alias as per org
     - name: Validate Package Changes
       if: ${{endsWith(env.precednt,'</version>') || endsWith(env.destprecednt,'</version>')}}
