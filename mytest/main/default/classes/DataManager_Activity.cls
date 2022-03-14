@@ -12,7 +12,7 @@ public class DataManager_Activity  implements Queueable {
     private Integer absDaysDiff;
     
     // =========================================================================
-    //           Class Details (constructor and execute)
+    //           Class  (constructor and execute)
     // =========================================================================
     
     public DataManager_Activity() {
