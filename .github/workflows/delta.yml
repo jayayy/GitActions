@@ -54,10 +54,10 @@ jobs:
     - name: Validate Package Changes
       if:  ${{!endsWith(env.precednt,'</version>') && !endsWith(env.destprecednt,'</version>')}}
       run: |
-        sfdx force:source:deploy -x package/package.xml --postdestructivechanges destructiveChanges/destructiveChanges.xml -u prod -l RunAllTestsInOrg -c > deployid.txt
-        cat deployid.txt
-        cat deployid | head -2 | tail -1 | cut -c12-30  > deployid.txt
-        echo "jobid=$(cat deployid.txt)" >> $GITHUB_ENV
+        sfdx force:source:deploy -x package/package.xml --postdestructivechanges destructiveChanges/destructiveChanges.xml -u prod -l RunAllTestsInOrg -c #> deployid.txt
+        # cat deployid.txt
+        # cat deployid | head -2 | tail -1 | cut -c12-30  > deployid.txt  
+        # echo "jobid=$(cat deployid.txt)" >> $GITHUB_ENV
 
     # Deploy directly to Org; use alias as per org
     - name: Deploy Package Changes
