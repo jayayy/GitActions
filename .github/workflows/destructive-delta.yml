@@ -46,8 +46,8 @@ jobs:
         
     - name: Store SHA 
       run: |
-        echo $GITHUB_SHA > ./deploymentCommit.txt        
+        echo $GITHUB_SHA > buildfiles/deploymentCommit.txt        
         cat package/package.xml > buildfiles/package.xml
         cat destructiveChanges/destructiveChanges.xml > buildfiles/destructivePackage.xml
         git config --global user.email "mehta.jay223@gmail.com"; git config --global user.name "JayMehta"
-        git add deploymentCommit.txt ; git commit -m "Last deployed Commit SHA updated"; git push
+        git add buildfiles ; git commit -m "Last deployed Commit SHA updated"; git push
