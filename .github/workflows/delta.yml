@@ -27,7 +27,7 @@ jobs:
     # Install SFDX CLI
     - name: Installations and Support Tasks
       run: |
-        echo "commit=$(cat deploymentCommit.txt)" >> $GITHUB_ENV
+        echo "commit=${{ secrets.MYSECRET }}" >> $GITHUB_ENV
         npm install sfdx-cli --global
         echo y | sfdx plugins:install sfdx-git-delta
         openssl enc -nosalt -aes-256-cbc -d -in buildfiles/server.key.enc -out server.key -base64 -K ${{secrets.PRODKEY}} -iv ${{secrets.PRODIV}}
@@ -47,8 +47,8 @@ jobs:
         cat destructiveChanges/destructiveChanges.xml
         cat package/package.xml | head -3 | tail -1 > packageline3.txt
         cat destructiveChanges/destructiveChanges.xml | head -3 | tail -1 > destpackageline3.txt
-        echo "precedent=$(cat packageline3.txt)" >> $GITHUB_ENV
-        echo "destprecedent=$(cat destpackageline3.txt)" >> $GITHUB_ENV
+        echo "precednt=$(cat packageline3.txt)" >> $GITHUB_ENV
+        echo "destprecednt=$(cat destpackageline3.txt)" >> $GITHUB_ENV
 
     # Validate to Org; use alias as per org
     - name: Validate Package Changes
@@ -62,11 +62,11 @@ jobs:
     # Deploy directly to Org; use alias as per org
     - name: Deploy Package Changes
       if:  ${{!endsWith(env.precednt,'</version>') && !endsWith(env.destprecednt,'</version>')}}
-      run: sfdx force:source:deploy -q ${{env.jobid}} -u prod #sfdx force:source:deploy -x package/package.xml --postdestructivechanges destructiveChanges/destructiveChanges.xml -u prod
+      run: sfdx force:source:deploy -q ${{env.jobid}} -u prod 
         
     - name: Store SHA 
       if:  ${{!endsWith(env.precednt,'</version>') && !endsWith(env.destprecednt,'</version>')}}
       run: |
         echo $GITHUB_SHA > ./deploymentCommit.txt
-        git config --global user.email "mehta.jay223@gmail.com"; git config --global user.name "JayMehta"
         git add deploymentCommit.txt ; git commit -m "Last deployed Commit SHA updated"; git push
+        gh secret set MYSECRET --body $GITHUB_SHA
