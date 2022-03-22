@@ -57,7 +57,4 @@ jobs:
         
     - name: Store SHA 
       if:  ${{!endsWith(env.precednt,'</version>') && !endsWith(env.destprecednt,'</version>')}}
-      run: |
-        echo $GITHUB_SHA > ./deploymentCommit.txt
-        git add deploymentCommit.txt ; git commit -m "Last deployed Commit SHA updated"; git push
-        gh secret set MYSECRET --body $GITHUB_SHA
+      run: gh secret set MYSECRET --body $GITHUB_SHA
