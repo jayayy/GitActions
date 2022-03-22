@@ -58,7 +58,8 @@ jobs:
     - name: Store SHA 
       if:  ${{!endsWith(env.precednt,'</version>') && !endsWith(env.destprecednt,'</version>')}}
       run: |
-        GH_TOKEN: ${{ secrets.token }}
+        echo "GH_TOKEN=${{ secrets.token }}" >> $GITHUB_ENV
         gh auth login
         gh secret set MYSECRET --body $GITHUB_SHA
+
         
