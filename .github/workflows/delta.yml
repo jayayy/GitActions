@@ -52,11 +52,9 @@ jobs:
 
     # Deploy directly to Org; use alias as per org
     - name: Deploy Package Changes
-      if:  ${{!endsWith(env.precednt,'</version>') && !endsWith(env.destprecednt,'</version>')}}
       run: sfdx force:source:deploy -x package/package.xml -u prod 
         
     - name: Store SHA 
-      if:  ${{!endsWith(env.precednt,'</version>') && !endsWith(env.destprecednt,'</version>')}}
       run: |
         echo "GH_TOKEN=${{ secrets.token }}" >> $GITHUB_ENV
         gh auth login
