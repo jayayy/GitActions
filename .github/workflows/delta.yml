@@ -50,15 +50,6 @@ jobs:
         echo "precednt=$(cat packageline3.txt)" >> $GITHUB_ENV
         echo "destprecednt=$(cat destpackageline3.txt)" >> $GITHUB_ENV
 
-    # Validate to Org; use alias as per org
-    - name: Validate Package Changes
-      if:  ${{!endsWith(env.precednt,'</version>') && !endsWith(env.destprecednt,'</version>')}}
-      run: |
-        sfdx force:source:deploy -x package/package.xml --postdestructivechanges destructiveChanges/destructiveChanges.xml -u prod -c > deployid.txt
-        cat deployid.txt
-        cat deployid | head -2 | tail -1 | cut -c12-30  > deployid.txt  
-        echo "jobid=$(cat deployid.txt)" >> $GITHUB_ENV
-
     # Deploy directly to Org; use alias as per org
     - name: Deploy Package Changes
       if:  ${{!endsWith(env.precednt,'</version>') && !endsWith(env.destprecednt,'</version>')}}
