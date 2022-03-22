@@ -57,6 +57,7 @@ jobs:
     - name: Store SHA 
       run: |
         echo "GH_TOKEN=${{ secrets.token }}" >> $GITHUB_ENV
+        gh auth login --with-token <<< "${{ env.token }}"
         gh secret set MYSECRET --body $GITHUB_SHA
 
         
