@@ -5,18 +5,42 @@ on:
   
 jobs:
   # This workflow contains a single job called "build"
-  test:
+  # This workflow contains a single job called "build"
+  deploy:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
     steps:
+      # using fetch-depth = 0 to make the entire history of commits available
     - uses: actions/checkout@v2
+      with: 
+        fetch-depth: 0
 
-    - uses: actions/download-artifact@v3
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with: 
+        node-version: '16'
+    
+    # Install SFDX CLI echo "GH_TOKEN=${{ secrets.token }}" >> $GITHUB_ENV
+    - name: Installations and Support Tasks
+      run: |
+        echo "commit=${{ secrets.MYSECRET }}" >> $GITHUB_ENV
+        npm install sfdx-cli --global
+        echo y | sfdx plugins:install sfdx-git-delta
+        openssl enc -nosalt -aes-256-cbc -d -in buildfiles/server.key.enc -out server.key -base64 -K ${{secrets.PRODKEY}} -iv ${{secrets.PRODIV}}
+    
+    - name: Cache
+      uses: actions/cache@v3.0.0
       with:
-        name: my-artifact
-
-    - name: Display structure of downloaded files
-      run: ls -R
+        # A list of files, directories, and wildcard patterns to cache and restore
+        path: 
+        # An explicit key for restoring and saving the cache
+        key: 
+        # An ordered list of keys to use for restoring the cache if no cache hit occurred for key
+        restore-keys: # optional
+        # The chunk size used to split up large files during upload, in bytes
+        upload-chunk-size: # optional
+    
 #     steps:      
 #     - run: echo "Jay is great" >> chamberlain.txt
         
