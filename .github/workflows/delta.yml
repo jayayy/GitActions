@@ -24,10 +24,9 @@ jobs:
       with: 
         node-version: '16'
     
-    # Install SFDX CLI
+    # Install SFDX CLI echo "GH_TOKEN=${{ secrets.token }}" >> $GITHUB_ENV
     - name: Installations and Support Tasks
       run: |
-        echo "GH_TOKEN=${{ secrets.token }}" >> $GITHUB_ENV
         echo "commit=${{ secrets.MYSECRET }}" >> $GITHUB_ENV
         npm install sfdx-cli --global
         echo y | sfdx plugins:install sfdx-git-delta
@@ -57,7 +56,6 @@ jobs:
         
     - name: Store SHA 
       run: |
-        export GITHUB_TOKEN=
         gh auth login --with-token <<< "${{ env.GH_TOKEN }}"
         gh secret set MYSECRET --body $GITHUB_SHA
 
