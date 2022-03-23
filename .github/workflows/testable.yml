@@ -8,13 +8,21 @@ jobs:
   test:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
 
-    steps:      
-    - run: echo "Jay is great" >> chamberlain.txt
+    - uses: actions/download-artifact@v3
+      with:
+        name: my-artifact
+
+    - name: Display structure of downloaded files
+      run: ls -R
+#     steps:      
+#     - run: echo "Jay is great" >> chamberlain.txt
         
-    - name: Storing Artifacts
-      uses: actions/upload-artifact@v2
-      with: 
-        name: Jay test
-        path: ./chamberlain.txt
+#     - name: Storing Artifacts
+#       uses: actions/download-artifact@v2
+#       with: 
+#         name: Jay test
+#         path: ./chamberlain.txt
 
