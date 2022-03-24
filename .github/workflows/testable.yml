@@ -20,7 +20,7 @@ jobs:
       uses: actions/setup-node@v1
       with: 
         node-version: '16'
-    
+        cache: 'npm'
     # Install SFDX CLI echo "GH_TOKEN=${{ secrets.token }}" >> $GITHUB_ENV
     - name: Installations and Support Tasks
       run: |
