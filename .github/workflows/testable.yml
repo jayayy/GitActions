@@ -5,7 +5,6 @@ on:
   
 jobs:
   # This workflow contains a single job called "build"
-  # This workflow contains a single job called "build"
   deploy:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -20,17 +19,42 @@ jobs:
       uses: actions/setup-node@v1
       with: 
         node-version: '16'
-        cache: ${{ runner.os }}-build-${{ env.cache-name }}-
+
     # Install SFDX CLI echo "GH_TOKEN=${{ secrets.token }}" >> $GITHUB_ENV
     - name: Installations and Support Tasks
       run: |
-        echo "commit=${{ secrets.MYSECRET }}" >> $GITHUB_ENV
         npm install sfdx-cli --global
         echo y | sfdx plugins:install sfdx-git-delta
-        openssl enc -nosalt -aes-256-cbc -d -in buildfiles/server.key.enc -out server.key -base64 -K ${{secrets.PRODKEY}} -iv ${{secrets.PRODIV}}
         ls
- 
+    
+    - name: Caching the whole sfdx-cli
+      uses: actions/cache@v3
+      with:
+        path:  ~/.npm
+        key: test-build-${{ env.cache-name }}-${{github.ref_name}}
 
+        
+        
+    
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Cache Primes
+      id: cache-primes
+      uses: actions/cache@v3
+      with:
+        path: prime-numbers
+        key: ${{ runner.os }}-primes
+
+    - name: Generate Prime Numbers
+      if: steps.cache-primes.outputs.cache-hit != 'true'
+      run: /generate-primes.sh -d prime-numbers
+
+    - name: Use Prime Numbers
+      run: /primes.sh -d prime-numbers
 #     steps:      
 #     - run: echo "Jay is great" >> chamberlain.txt
         
