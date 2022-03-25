@@ -18,32 +18,33 @@ jobs:
       with: 
         fetch-depth: 0
 
-#     - name: Attempting to cache the whole sfdx-cli
-#       id: cachehit
-#       uses: actions/cache@v3
-#       with:
-#         path:  ~/.npm
-#         key: test-build-jay-repo-name-123
-
-    - name: Setup Node
-      uses: actions/setup-node@v1
-      with: 
-        node-version: '16'
-
-    # Install SFDX CLI echo "GH_TOKEN=${{ secrets.token }}" >> $GITHUB_ENV
-    - name: Installations and Support Tasks
-      if: ${{!steps.cache.outputs.cachehit}}
-      run: |
-        npm install sfdx-cli --global
-        echo y | sfdx plugins:install sfdx-git-delta
-
-      
     - name: Attempting to cache the whole sfdx-cli
       id: cachehit
       uses: actions/cache@v3
       with:
         path:  ~/.npm
         key: test-build-jay-repo-name-124
+
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with: 
+        node-version: '16'
+
+#     - name: Installations and Support Tasks
+#       if: ${{!steps.cache.outputs.cachehit}}
+#       run: |
+#         npm install sfdx-cli --global
+#         echo y | sfdx plugins:install sfdx-git-delta
+      
+    - name: test with sfdx
+      run: sfdx force:source:deploy -p ".github/workflows/testable.yml"
+      
+#     - name: Attempting to cache the whole sfdx-cli
+#       id: cachehit
+#       uses: actions/cache@v3
+#       with:
+#         path:  ~/.npm
+#         key: test-build-jay-repo-name-124
         
         
     
