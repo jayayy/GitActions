@@ -11,9 +11,23 @@ jobs:
 
     steps:
       # using fetch-depth = 0 to make the entire history of commits available
+      
+    - name: Caching the whole sfdx-cli
+      uses: actions/cache@v3
+      with:
+        path:  ~/.npm
+        key: test-build-${{ env.cache-name }}-${{github.ref_name}}
+
     - uses: actions/checkout@v2
       with: 
         fetch-depth: 0
+
+    - name: Caching the whole sfdx-cli
+      id: cachehit
+      uses: actions/cache@v3
+      with:
+        path:  ~/.npm
+        key: test-build-${{ env.cache-name }}-${{github.ref_name}}
 
     - name: Setup Node
       uses: actions/setup-node@v1
@@ -22,39 +36,22 @@ jobs:
 
     # Install SFDX CLI echo "GH_TOKEN=${{ secrets.token }}" >> $GITHUB_ENV
     - name: Installations and Support Tasks
-      run: |
-        npm install sfdx-cli --global
-        echo y | sfdx plugins:install sfdx-git-delta
-        ls
+      if: steps.cache.outputs.cachehit != true
+      run: npm install sfdx-cli --global
     
-    - name: Caching the whole sfdx-cli
-      uses: actions/cache@v3
-      with:
-        path:  ~/.npm
-        key: test-build-${{ env.cache-name }}-${{github.ref_name}}
+    - name: installing sgd
+      run: echo y | sfdx plugins:install sfdx-git-delta
+
+#     - name: Caching the whole sfdx-cli
+#       uses: actions/cache@v3
+#       with:
+#         path:  ~/.npm
+#         key: test-build-${{ env.cache-name }}-${{github.ref_name}}
 
         
         
     
-  build:
-    runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Cache Primes
-      id: cache-primes
-      uses: actions/cache@v3
-      with:
-        path: prime-numbers
-        key: ${{ runner.os }}-primes
-
-    - name: Generate Prime Numbers
-      if: steps.cache-primes.outputs.cache-hit != 'true'
-      run: /generate-primes.sh -d prime-numbers
-
-    - name: Use Prime Numbers
-      run: /primes.sh -d prime-numbers
 #     steps:      
 #     - run: echo "Jay is great" >> chamberlain.txt
         
