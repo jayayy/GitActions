@@ -29,7 +29,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path:  ~/.npm
-        key: test-build-${{ env.cache-name }}-${{github.ref_name}}
+        key: test-build-jay-repo-name
 
     - name: Setup Node
       uses: actions/setup-node@v1
@@ -44,11 +44,14 @@ jobs:
     - name: installing sgd
       run: echo y | sfdx plugins:install sfdx-git-delta
 
-#     - name: Caching the whole sfdx-cli
-#       uses: actions/cache@v3
-#       with:
-#         path:  ~/.npm
-#         key: test-build-${{ env.cache-name }}-${{github.ref_name}}
+    - name: listing things in .npm folder
+      run: cd ~/.npm ; ls 
+      
+    - name: Caching the whole sfdx-cli
+      uses: actions/cache@v3
+      with:
+        path:  ~/.npm
+        key: test-build-jay-repo-name
 
         
         
