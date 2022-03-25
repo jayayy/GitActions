@@ -14,22 +14,16 @@ jobs:
     steps:
       # using fetch-depth = 0 to make the entire history of commits available
       
-    - name: Caching the whole sfdx-cli
-      uses: actions/cache@v3
-      with:
-        path:  ~/.npm
-        key: test-build-${{ env.cache-name }}-${{github.ref_name}}
-
     - uses: actions/checkout@v2
       with: 
         fetch-depth: 0
 
-    - name: Caching the whole sfdx-cli
-      id: cachehit
-      uses: actions/cache@v3
-      with:
-        path:  ~/.npm
-        key: test-build-jay-repo-name
+#     - name: Caching the whole sfdx-cli
+#       id: cachehit
+#       uses: actions/cache@v3
+#       with:
+#         path:  ~/.npm
+#         key: test-build-jay-repo-name-121
 
     - name: Setup Node
       uses: actions/setup-node@v1
