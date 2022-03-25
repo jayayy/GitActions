@@ -18,12 +18,12 @@ jobs:
       with: 
         fetch-depth: 0
 
-    - name: Attempting to cache the whole sfdx-cli
-      id: cachehit
-      uses: actions/cache@v3
-      with:
-        path:  ~/.npm
-        key: test-build-jay-repo-name-123
+#     - name: Attempting to cache the whole sfdx-cli
+#       id: cachehit
+#       uses: actions/cache@v3
+#       with:
+#         path:  ~/.npm
+#         key: test-build-jay-repo-name-123
 
     - name: Setup Node
       uses: actions/setup-node@v1
@@ -32,16 +32,18 @@ jobs:
 
     # Install SFDX CLI echo "GH_TOKEN=${{ secrets.token }}" >> $GITHUB_ENV
     - name: Installations and Support Tasks
-      if: steps.cache.outputs.cachehit != true
-      run: npm install sfdx-cli --global
-    
-    - name: installing sgd
-      run: echo y | sfdx plugins:install sfdx-git-delta
+      if: ${{!steps.cache.outputs.cachehit}}
+      run: |
+        npm install sfdx-cli --global
+        echo y | sfdx plugins:install sfdx-git-delta
 
-    - name: listing things in .npm folder
-      run: cd ~/.npm ; ls 
       
-
+    - name: Attempting to cache the whole sfdx-cli
+      id: cachehit
+      uses: actions/cache@v3
+      with:
+        path:  ~/.npm
+        key: test-build-jay-repo-name-124
         
         
     
