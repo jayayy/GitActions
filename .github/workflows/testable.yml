@@ -22,8 +22,8 @@ jobs:
       id: cachehit
       uses: actions/cache@v3
       with:
-        path: /opt/hostedtoolcache/node/16.14.0/x64/bin/
-        key: test-build-jay-repo-name-sfdx-cli
+        path:  ~/.npm
+        key: test-build-jay-repo-name-sfdx-cli-212
 
     - name: Setup Node
       uses: actions/setup-node@v1
@@ -45,16 +45,3 @@ jobs:
 #       with:
 #         path: /opt/hostedtoolcache/node/16.14.0/x64/bin/sfdx
 #         key: test-build-jay-repo-name-sfdx
-
-        
-    
-
-#     steps:      
-#     - run: echo "Jay is great" >> chamberlain.txt
-        
-#     - name: Storing Artifacts
-#       uses: actions/download-artifact@v2
-#       with: 
-#         name: Jay test
-#         path: ./chamberlain.txt
-
