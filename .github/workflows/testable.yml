@@ -39,7 +39,7 @@ jobs:
 #       run: sfdx force:source:deploy -p ".github/workflows/testable.yml"
 
     - name: lsiting stuff in root
-#       run: cd /. ; ls ; cd /npm; ls
+      run: cd /. ; ls ; cd /npm; ls
 #     - name: Attempting to cache the whole sfdx-cli
 #       id: cachehit
 #       uses: actions/cache@v3
