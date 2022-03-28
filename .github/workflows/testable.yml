@@ -18,32 +18,34 @@ jobs:
       with: 
         fetch-depth: 0
 
-    - name: Attempting to cache the whole sfdx-cli
-      id: cachehit
-      uses: actions/cache@v3
-      with:
-        path:  ~/
-        key: test-build-jay-repo-name-12556
-
-    - name: Setup Node
-      uses: actions/setup-node@v1
-      with: 
-        node-version: '16'
-
-#     - name: Installations and Support Tasks
-#       run: |
-#         npm install sfdx-cli --global
-#         echo y | sfdx plugins:install sfdx-git-delta
-      
-    - name: test with sfdx
-      run: sfdx force:source:deploy -p ".github/workflows/testable.yml"
-      
 #     - name: Attempting to cache the whole sfdx-cli
 #       id: cachehit
 #       uses: actions/cache@v3
 #       with:
 #         path:  ~/
 #         key: test-build-jay-repo-name-12556
+
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with: 
+        node-version: '16'
+
+    - name: Installations and Support Tasks
+      run: |
+        npm install sfdx-cli --global
+        echo y | sfdx plugins:install sfdx-git-delta
+      
+#     - name: test with sfdx
+#       run: sfdx force:source:deploy -p ".github/workflows/testable.yml"
+
+    - name: lsiting stuff in root
+      run: cd /. ; ls 
+    - name: Attempting to cache the whole sfdx-cli
+      id: cachehit
+      uses: actions/cache@v3
+      with:
+        path:  ~/
+        key: test-build-jay-repo-name-12556
         
         
     
