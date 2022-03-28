@@ -22,8 +22,8 @@ jobs:
       id: cachehit
       uses: actions/cache@v3
       with:
-        path: /opt/hostedtoolcache/node/16.14.0/x64/bin/sfdx
-        key: test-build-jay-repo-name-sfdx
+        path: /opt/hostedtoolcache/node/16.14.0/x64/bin/
+        key: test-build-jay-repo-name-sfdx-cli
 
     - name: Setup Node
       uses: actions/setup-node@v1
@@ -35,6 +35,7 @@ jobs:
       run: |
         npm install sfdx-cli --global
         echo y | sfdx plugins:install sfdx-git-delta
+        
     - name: test with sfdx
       run: which sfdx
       
