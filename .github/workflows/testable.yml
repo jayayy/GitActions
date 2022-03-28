@@ -35,8 +35,8 @@ jobs:
         npm install sfdx-cli --global
         echo y | sfdx plugins:install sfdx-git-delta
       
-    - name: test with sfdx
-      run: sfdx force:source:deploy -p ".github/workflows/testable.yml"
+#     - name: test with sfdx
+#       run: sfdx force:source:deploy -p ".github/workflows/testable.yml"
       
     - name: Attempting to cache the whole sfdx-cli
       id: cachehit
