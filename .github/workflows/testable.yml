@@ -22,8 +22,8 @@ jobs:
       id: cachehit
       uses: actions/cache@v3
       with:
-        path:  ~/npm
-        key: test-build-jay-repo-name-123
+        path:  ~/
+        key: test-build-jay-repo-name123
 
     - name: Setup Node
       uses: actions/setup-node@v1
@@ -34,7 +34,7 @@ jobs:
       run: |
         npm install sfdx-cli --global
         echo y | sfdx plugins:install sfdx-git-delta
-      
+        which sfdx
 #     - name: test with sfdx
 #       run: sfdx force:source:deploy -p ".github/workflows/testable.yml"
 
