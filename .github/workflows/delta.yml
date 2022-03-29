@@ -33,8 +33,6 @@ jobs:
         tar xJf sfdx-v7.143.0-7049747-linux-arm.tar.xz -C sfdx-cli --strip-components 1
         ./sfdx-cli/install
         openssl enc -nosalt -aes-256-cbc -d -in buildfiles/server.key.enc -out server.key -base64 -K ${{secrets.PRODKEY}} -iv ${{secrets.PRODIV}}
-        sfdx update
-    - run: sfdx --version
     - name: isntall plugin
       run: |
         sfdx --version
