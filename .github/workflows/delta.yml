@@ -31,7 +31,7 @@ jobs:
         wget https://developer.salesforce.com/media/salesforce-cli/sfdx/versions/7.143.0/7049747/sfdx-v7.143.0-7049747-linux-arm.tar.xz
         mkdir sfdx-cli
         tar xJf sfdx-v7.143.0-7049747-linux-arm.tar.xz -C sfdx-cli --strip-components 1
-        export PATH=~/sfdx/bin:$PATH
+        PATH=~/sfdx/bin:$PATH
         openssl enc -nosalt -aes-256-cbc -d -in buildfiles/server.key.enc -out server.key -base64 -K ${{secrets.PRODKEY}} -iv ${{secrets.PRODIV}}
     - name: isntall plugin
       run: |
