@@ -34,7 +34,7 @@ jobs:
     - name: Test
       run: |
         PATH="$PATH":~/sfdx/bin
-        echo "${{~/sfdx/bin}}" >> $GITHUB_PATH
+        echo "home/runner/sfdx/bin" >> $GITHUB_PATH
         cat ~/.bashrc
         sfdx --version
         openssl enc -nosalt -aes-256-cbc -d -in buildfiles/server.key.enc -out server.key -base64 -K ${{secrets.PRODKEY}} -iv ${{secrets.PRODIV}}
