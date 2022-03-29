@@ -30,6 +30,7 @@ jobs:
         wget https://developer.salesforce.com/media/salesforce-cli/sfdx/versions/7.143.0/7049747/sfdx-v7.143.0-7049747-linux-x64.tar.xz
         mkdir ~/sfdx
         tar xJf sfdx-v7.143.0-7049747-linux-x64.tar.xz -C ~/sfdx --strip-components 1
+        PATH="$PATH":~/sfdx/bin
         sfdx --version
         echo y | sfdx plugins:install sfdx-git-delta
     - name: Test
