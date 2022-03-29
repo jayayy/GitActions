@@ -28,9 +28,15 @@ jobs:
     - name: Installations and Support Tasks
       run: |
         echo "commit=${{ secrets.MYSECRET }}" >> $GITHUB_ENV
-        npm install sfdx-cli --global
-        echo y | sfdx plugins:install sfdx-git-delta
+        wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+        mkdir sfdx-cli
+        tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
+        ./sfdx-cli/install
         openssl enc -nosalt -aes-256-cbc -d -in buildfiles/server.key.enc -out server.key -base64 -K ${{secrets.PRODKEY}} -iv ${{secrets.PRODIV}}
+   
+   
+    - name: isntall plugin
+      run: echo y | sfdx plugins:install sfdx-git-delta
 
     # Authorize SF Org
     - name: Authorize Org
@@ -51,12 +57,13 @@ jobs:
         echo "destprecednt=$(cat destpackageline3.txt)" >> $GITHUB_ENV
 
     # Deploy directly to Org; use alias as per org
-    - name: Deploy Package Changes
-      run: sfdx force:source:deploy -x package/package.xml -u prod 
+#     - name: Deploy Package Changes
+#       if: precednt
+#       run: sfdx force:source:deploy -x package/package.xml -u prod 
         
-    - name: Store SHA 
-      run: |
-        gh auth login --with-token <<< "${{ secrets.token }}"
-        gh secret set MYSECRET --body $GITHUB_SHA
+#     - name: Store SHA 
+#       run: |
+#         gh auth login --with-token <<< "${{ secrets.token }}"
+#         gh secret set MYSECRET --body $GITHUB_SHA
 
         
