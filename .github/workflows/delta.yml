@@ -28,9 +28,9 @@ jobs:
     - name: Installations and Support Tasks
       run: |
         echo "commit=${{ secrets.MYSECRET }}" >> $GITHUB_ENV
-        wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-386.tar.xz
+        wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
         mkdir sfdx-cli
-        tar xJf sfdx-linux-386.tar.xz -C sfdx-cli --strip-components 1
+        tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
         ./sfdx-cli/install
         openssl enc -nosalt -aes-256-cbc -d -in buildfiles/server.key.enc -out server.key -base64 -K ${{secrets.PRODKEY}} -iv ${{secrets.PRODIV}}
         sfdx update
