@@ -33,7 +33,7 @@ jobs:
         tar xJf sfdx-v7.143.0-7049747-linux-x64.tar.xz -C ~/sfdx --strip-components 1
     - name: Test
       run: |
-        PATH = $PATH:sfdx/bin
+        PATH = "$PATH":sfdx/bin
         echo $PATH
         echo "SAving this to the github path variable"
         echo "$PATH" >> $GITHUB_PATH 
