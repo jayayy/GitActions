@@ -20,10 +20,6 @@ jobs:
         mkdir sfdx-cli
         tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
         ./sfdx-cli/install
-      
-#     - name: Attempting to cache the whole sfdx-cli
-#       id: cachehit
-#       uses: actions/cache@v3
-#       with:
-#         path: /opt/hostedtoolcache/node/16.14.0/x64/bin/sfdx
-#         key: test-build-jay-repo-name-sfdx
+    - name: Attempting to cache the whole sfdx-cli
+      run: which sfdx
+    - run: sfdx alias:list
