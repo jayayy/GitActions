@@ -21,7 +21,7 @@ jobs:
     - uses: actions/cache@v3
       with: 
         path: ${~/sfdx}
-        key: sfdx-eu1rbd-v2
+        key: sfdx-eu1rbd-v3
     
     # Install SFDX CLI echo "GH_TOKEN=${{ secrets.token }}" >> $GITHUB_ENV
     - name: Installations and Support Tasks
