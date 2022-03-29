@@ -28,17 +28,17 @@ jobs:
     - name: Installations and Support Tasks
       run: |
         echo "commit=${{ secrets.MYSECRET }}" >> $GITHUB_ENV
-        wget https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
+        wget https://developer.salesforce.com/media/salesforce-cli/sfdx/versions/7.143.0/7049747/sfdx-v7.143.0-7049747-linux-arm.tar.xz
         mkdir ~/sfdx
-        tar xJf sfdx-linux-x64.tar.xz -C ~/sfdx --strip-components 1
+        tar xJf sfdx-v7.143.0-7049747-linux-arm -C ~/sfdx --strip-components 1
     - name: Test
       run: |
-        cat ~/.bash_profile
-        echo 'export PATH="$PATH":~/sfdx/bin' >> ~/.bash_profile
         PATH="$PATH":~/sfdx/bin
+        echo test
         cat ~/.bash_profile
         sfdx --version
-        echo $PATH
+        echo $PATH >> ~/.bash_profile
+        cat ~/.bash_profile
         openssl enc -nosalt -aes-256-cbc -d -in buildfiles/server.key.enc -out server.key -base64 -K ${{secrets.PRODKEY}} -iv ${{secrets.PRODIV}}
     - run: echo $PATH
 
