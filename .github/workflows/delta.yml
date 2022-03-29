@@ -36,7 +36,9 @@ jobs:
    
    
     - name: isntall plugin
-      run: echo y | sfdx plugins:install sfdx-git-delta
+      run: |
+        sfdx --version
+        echo y | sfdx plugins:install sfdx-git-delta
 
     # Authorize SF Org
     - name: Authorize Org
