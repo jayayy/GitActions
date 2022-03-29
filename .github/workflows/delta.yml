@@ -4,7 +4,7 @@ name: Delta Deploy - XXXPROD
 on:
   push:
     branches: [ master ]
-    paths: 'mytest/main/default/**'
+    paths: ['mytest/main/default/**','.github/workflows/delta.yml']
   workflow_dispatch:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -33,7 +33,7 @@ jobs:
         tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
         ./sfdx-cli/install
         openssl enc -nosalt -aes-256-cbc -d -in buildfiles/server.key.enc -out server.key -base64 -K ${{secrets.PRODKEY}} -iv ${{secrets.PRODIV}}
-   
+        sfdx update
     - run: wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
     - name: isntall plugin
       run: |
