@@ -31,7 +31,7 @@ jobs:
         wget https://developer.salesforce.com/media/salesforce-cli/sfdx/versions/7.143.0/7049747/sfdx-v7.143.0-7049747-linux-arm.tar.xz
         mkdir ~/sfdx
         tar xJf sfdx-v7.143.0-7049747-linux-arm.tar.xz -C ~/sfdx --strip-components 1
-        PATH=~/sfdx/bin:$PATH
+        export PATH=~/sfdx/bin:$PATH
         openssl enc -nosalt -aes-256-cbc -d -in buildfiles/server.key.enc -out server.key -base64 -K ${{secrets.PRODKEY}} -iv ${{secrets.PRODIV}}
     - run: echo $PATH
 
