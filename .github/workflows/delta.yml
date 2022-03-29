@@ -20,8 +20,8 @@ jobs:
         fetch-depth: 0
     - uses: actions/cache@v3
       with: 
-        path: $~/sfdc
-        key: sfdx-eu1rbd-v1
+        path: $~/sfdx
+        key: sfdx-eu1rbd-v2
     
     # Install SFDX CLI echo "GH_TOKEN=${{ secrets.token }}" >> $GITHUB_ENV
     - name: Installations and Support Tasks
@@ -30,6 +30,8 @@ jobs:
         wget https://developer.salesforce.com/media/salesforce-cli/sfdx/versions/7.143.0/7049747/sfdx-v7.143.0-7049747-linux-x64.tar.xz
         mkdir ~/sfdx
         tar xJf sfdx-v7.143.0-7049747-linux-x64.tar.xz -C ~/sfdx --strip-components 1
+        sfdx --version
+        echo y | sfdx plugins:install sfdx-git-delta
     - name: Test
       run: |
         PATH="$PATH":~/sfdx/bin
@@ -42,8 +44,7 @@ jobs:
 
     - name: isntall plugin
       run: |
-        sfdx --version
-        echo y | sfdx plugins:install sfdx-git-delta
+        
 
     # Authorize SF Org
     - name: Authorize Org
@@ -51,7 +52,7 @@ jobs:
         CLIENT_ID: ${{ secrets.SALESFORCEPRODCLIENTID }}
         USERNAME: ${{ secrets.SALESFORCEPRODUSERNAME }}
         INSTANCE_URL: ${{ secrets.SALESFORCEPRODINSTANCEURL }}
-      run: PATH="$PATH":~/sfdx/bin;sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
+      run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
     
     - name: Create Delta Changes Package
       run: |
