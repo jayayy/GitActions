@@ -14,29 +14,12 @@ jobs:
     steps:
       # using fetch-depth = 0 to make the entire history of commits available
       
-    - uses: actions/checkout@v2
-      with: 
-        fetch-depth: 0
-
-    - name: Attempting to cache the whole sfdx-cli
-      id: cachehit
-      uses: actions/cache@v3
-      with:
-        path:  ~/.npm
-        key: test-build-jay-repo-name-sfdx-cli-212
-
-    - name: Setup Node
-      uses: actions/setup-node@v1
-      with: 
-        node-version: '16'
-
-    - name: Installations and Support Tasks
+    - name: install sfdx via .tar
       run: |
-        npm install sfdx-cli --global
-        echo y | sfdx plugins:install sfdx-git-delta
-        
-    - name: test with sfdx
-      run: which sfdx
+        wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+        mkdir sfdx-cli
+        tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
+        ./sfdx-cli/install
       
 #     - name: Attempting to cache the whole sfdx-cli
 #       id: cachehit
