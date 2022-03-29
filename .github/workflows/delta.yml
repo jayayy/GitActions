@@ -41,6 +41,7 @@ jobs:
 
     - name: isntall plugin
       run: |
+        PATH="$PATH":~/sfdx/bin
         sfdx --version
         echo y | sfdx plugins:install sfdx-git-delta
 
@@ -50,10 +51,11 @@ jobs:
         CLIENT_ID: ${{ secrets.SALESFORCEPRODCLIENTID }}
         USERNAME: ${{ secrets.SALESFORCEPRODUSERNAME }}
         INSTANCE_URL: ${{ secrets.SALESFORCEPRODINSTANCEURL }}
-      run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
+      run: PATH="$PATH":~/sfdx/bin;sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
     
     - name: Create Delta Changes Package
       run: |
+        PATH="$PATH":~/sfdx/bin
         sfdx sgd:source:delta --output ./ --source=mytest/main/default/ --to HEAD --from ${{env.commit}} 
         cat package/package.xml 
         cat destructiveChanges/destructiveChanges.xml
