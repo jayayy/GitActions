@@ -35,10 +35,10 @@ jobs:
       run: |
         PATH="$PATH":~/sfdx/bin
         echo test
-        cat ~/.bash_profile
+        cat ~/.bashrc
         sfdx --version
-        echo $PATH >> ~/.bash_profile
-        cat ~/.bash_profile
+        echo $PATH >> ~/.bashrc
+        cat ~/.bashrc
         openssl enc -nosalt -aes-256-cbc -d -in buildfiles/server.key.enc -out server.key -base64 -K ${{secrets.PRODKEY}} -iv ${{secrets.PRODIV}}
     - run: echo $PATH
 
