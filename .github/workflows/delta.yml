@@ -32,6 +32,7 @@ jobs:
         mkdir ~/sfdx
         tar xJf sfdx-linux-x64.tar.xz -C ~/sfdx --strip-components 1
         echo "PATH=~/sfdx/bin:$PATH" >> ~/.bashrc
+        source ~/.bashrc
         echo $PATH
         openssl enc -nosalt -aes-256-cbc -d -in buildfiles/server.key.enc -out server.key -base64 -K ${{secrets.PRODKEY}} -iv ${{secrets.PRODIV}}
     - run: echo $PATH
