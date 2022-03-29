@@ -34,7 +34,7 @@ jobs:
         ./sfdx-cli/install
         openssl enc -nosalt -aes-256-cbc -d -in buildfiles/server.key.enc -out server.key -base64 -K ${{secrets.PRODKEY}} -iv ${{secrets.PRODIV}}
    
-   
+    - run: wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
     - name: isntall plugin
       run: |
         sfdx --version
