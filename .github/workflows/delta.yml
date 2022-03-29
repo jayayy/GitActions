@@ -34,6 +34,7 @@ jobs:
     - name: Test
       run: |
         PATH="$PATH":~/sfdx/bin
+        echo "{$PATH}" >> $GITHUB_PATH
         cat ~/.bashrc
         sfdx --version
         openssl enc -nosalt -aes-256-cbc -d -in buildfiles/server.key.enc -out server.key -base64 -K ${{secrets.PRODKEY}} -iv ${{secrets.PRODIV}}
@@ -41,7 +42,6 @@ jobs:
 
     - name: isntall plugin
       run: |
-        PATH="$PATH":~/sfdx/bin
         sfdx --version
         echo y | sfdx plugins:install sfdx-git-delta
 
