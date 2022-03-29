@@ -33,7 +33,10 @@ jobs:
         tar xJf sfdx-v7.143.0-7049747-linux-x64.tar.xz -C ~/sfdx --strip-components 1
     - name: Test
       run: |
-        echo "${~/sfdx/bin}" >> $GITHUB_PATH 
+        PATH = $PATH:sfdx/bin
+        echo $PATH
+        echo "SAving this to the github path variable"
+        echo "$PATH" >> $GITHUB_PATH 
         sfdx --version
         openssl enc -nosalt -aes-256-cbc -d -in buildfiles/server.key.enc -out server.key -base64 -K ${{secrets.PRODKEY}} -iv ${{secrets.PRODIV}}
     - run: echo $PATH
