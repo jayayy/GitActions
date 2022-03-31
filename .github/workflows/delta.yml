@@ -4,7 +4,7 @@ name: Delta Deploy - XXXPROD
 on:
   push:
     branches: [ master ]
-    paths: ['mytest/main/default/**','.github/workflows/delta.yml']
+    paths: ['mytest/main/default/**']
   workflow_dispatch:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -66,10 +66,9 @@ jobs:
         echo "precednt=$(cat packageline3.txt)" >> $GITHUB_ENV
         echo "destprecednt=$(cat destpackageline3.txt)" >> $GITHUB_ENV
 
-    # Deploy directly to Org; use alias as per org
-#     - name: Deploy Package Changes
-#       if: precednt
-#       run: sfdx force:source:deploy -x package/package.xml -u prod 
+#     Deploy directly to Org; use alias as per org
+    - name: validate Package Changes
+      run: sfdx force:source:deploy -x package/package.xml -u prod -c | tee head -2 | tail -1 | cut -c12-30
         
 #     - name: Store SHA 
 #       run: |
