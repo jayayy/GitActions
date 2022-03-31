@@ -37,15 +37,8 @@ jobs:
       run: |
         PATH="$PATH":~/sfdx/bin
         echo $PATH
-        echo "SAving this to the github path variable"
         echo "$PATH" >> $GITHUB_PATH 
-        sfdx --version
         openssl enc -nosalt -aes-256-cbc -d -in buildfiles/server.key.enc -out server.key -base64 -K ${{secrets.PRODKEY}} -iv ${{secrets.PRODIV}}
-    - run: echo $PATH
-
-    - name: isntall plugin
-      run: |
-        
 
     # Authorize SF Org
     - name: Authorize Org
@@ -67,9 +60,11 @@ jobs:
         echo "destprecednt=$(cat destpackageline3.txt)" >> $GITHUB_ENV
 
 #     Deploy directly to Org; use alias as per org
-    - name: validate Package Changes
-      run: sfdx force:source:deploy -x package/package.xml -u prod -c | tee head -2 | tail -1 | cut -c12-30
+    - name: validate Package
+      run: sfdx force:source:deploy -x package/package.xml -u prod -c | tee head -2 | tail -1 | cut -c12-30 >> deploy.txt
         
+    - name: deploy Package
+      run: sfdx force:source:deploy -q ${{cat deploy.txt}} -u prod
 #     - name: Store SHA 
 #       run: |
 #         gh auth login --with-token <<< "${{ secrets.token }}"
