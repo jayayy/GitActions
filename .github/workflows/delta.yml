@@ -4,7 +4,7 @@ name: Delta Deploy - XXXPROD
 on:
   push:
     branches: [ master ]
-    paths: ['mytest/main/default/**']
+#     paths: ['mytest/main/default/**']
   workflow_dispatch:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -59,7 +59,7 @@ jobs:
     - name: validate Package
       run: |
         sfdx force:source:deploy -x package/package.xml -u prod -c | tee head -2 | tail -1 | cut -c12-30 >> deploy.txt
-        echo "dpid=${{cat deploy.txt}}" >> $GITHUB_ENV
+        echo "dpid=$(cat deploy.txt)" >> $GITHUB_ENV
         
     - name: deploy Package
       run: sfdx force:source:deploy -q ${{env.dpid}} -u prod
