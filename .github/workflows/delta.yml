@@ -58,7 +58,8 @@ jobs:
 #     Deploy directly to Org; use alias as per org
     - name: validate Package
       run: |
-        sfdx force:source:deploy -x package/package.xml -u prod -c | tee head -2 | tail -1 | cut -c12-30 >> deploy.txt
+        sfdx force:source:deploy -x package/package.xml -u prod -c | head -2 | tail -1 | cut -c12-30 > deploy.txt
+        cat deploy.txt
         echo "dpid=$(cat deploy.txt)" >> $GITHUB_ENV
         
     - name: deploy Package
