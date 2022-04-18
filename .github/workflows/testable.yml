@@ -20,7 +20,7 @@ jobs:
       uses: cinotify/github-action@v1.1.0
       with:
         # Recipient email address
-        to: jay.deepak.mehta@accenture.com
+        to: mehta.jay223@gmail.com
         # Email subject
         subject: Your PR has been merged
         # Email body
