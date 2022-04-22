@@ -15,7 +15,6 @@ jobs:
     - name: Generate test file
       run: |
         printf 'kenobi vs. anakin\ndaenerys vs. jon snow\n' >> mas.txt 
-        echo ${{toJson(github)}}
     - name: CINotify Email
       uses: cinotify/github-action@v1.1.0
       id: serve
@@ -26,8 +25,8 @@ jobs:
         subject: ${{github.workflow}} has executed successfully.
         # Email body
         body: |
-          Pusher name: ${{github.event.pull_request.user.login}}
-          GithubContext: ${{toJson(github)}}
+          Pusher name: ${{github.event.pull_request.user}}
+          Pusher email: ${{github.event.pull_request.email}}
           Commit ID for ${{github.ref}} is ${{github.sha}}.
           PR merged by ${{github.actor}}.
     
