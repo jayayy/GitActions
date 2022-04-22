@@ -27,7 +27,7 @@ jobs:
         body: |
           Pusher name: ${{github.event.pull_request.user.login}}
           Components deployed: 
-          ${{cat mas.txt}}
+          `cat mas.txt`
           Commit ID for ${{github.ref}} is ${{github.sha}}.
           PR merged by ${{github.actor}}.
     
