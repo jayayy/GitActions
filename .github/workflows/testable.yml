@@ -14,7 +14,9 @@ jobs:
     steps:
       # using fetch-depth = 0 to make the entire history of commits available
     - name: Generate test file
-      run: printf 'kenobi vs. anakin\ndaenerys vs. jon snow\n' >> mas.txt 
+      run: |
+        printf 'kenobi vs. anakin\ndaenerys vs. jon snow\n' >> mas.txt 
+        echo ${{toJson(github)}}
     - name: CINotify Email
       uses: cinotify/github-action@v1.1.0
       id: serve
@@ -26,8 +28,7 @@ jobs:
         # Email body
         body: |
           Pusher name: ${{github.event.pull_request.user.login}}
-          Components deployed: 
-          $(cat mas.txt)
+          GithubContext: ${{toJson(github)}}
           Commit ID for ${{github.ref}} is ${{github.sha}}.
           PR merged by ${{github.actor}}.
     
