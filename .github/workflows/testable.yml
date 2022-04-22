@@ -13,18 +13,21 @@ jobs:
 
     steps:
       # using fetch-depth = 0 to make the entire history of commits available
-      
+    - name: Generate test file
+      run: printf 'kenobi vs. anakin\ndaenerys vs. jon snow\n' >> mas.txt 
     - name: CINotify Email
-    # You may pin to the exact commit or the version.
-    # uses: cinotify/github-action@d99e3149178b27572a58ace227621c333884e3fb
       uses: cinotify/github-action@v1.1.0
       id: serve
       with:
         # Recipient email address
         to: mehta.jay223@gmail.com
         # Email subject
-        subject: Your PR has been merged
+        subject: ${{github.workflow}} has executed successfully.
         # Email body
-        body: Enjoy your day off!
-      
-    - run: echo ${{steps.serve.outputs.status }}
+        body: |
+          Pusher name: ${{github.event.pull_request.user.login}}
+          Components deployed: 
+          ${{cat mas.txt}}
+          Commit ID for ${{github.ref}} is ${{github.sha}}.
+          PR merged by ${{github.actor}}.
+    
