@@ -2,7 +2,6 @@ name: CONSTRUCTIVE-AM1RBD
 
 on:
   push:
-    paths: .github/workflows/testable.yml
   workflow_dispatch:
   
 jobs:
