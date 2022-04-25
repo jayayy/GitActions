@@ -2,7 +2,6 @@
 public class DataManager_CleanUpTest {
     @isTest static void testQueueable() {
         // SETUP
-	//Testing PR notifications
         DataManager_TestUtils.initAccs();
         DataManager_TestUtils.initOpps();
 		
