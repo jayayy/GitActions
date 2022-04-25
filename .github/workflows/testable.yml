@@ -2,7 +2,6 @@ name: CONSTRUCTIVE-AM1RBD
 
 on:
   push:
-  pull_request:
   workflow_dispatch:
   
 jobs:
@@ -20,15 +19,13 @@ jobs:
       uses: cinotify/github-action@v1.1.0
       with:
         # Recipient email address
-        to: mj927994@gsk.com
+        to: ${{github.event.commits.author.email}}
         # Email subject
         subject: ${{github.workflow}} has executed successfully.
         # Email body
-        body: |
-          
-          Pusher name: ${{github.event.pull_request.user}}
-          Pusher email: ${{github.event.pull_request.email}}
+        body: | 
           Commit ID for ${{github.ref}} is ${{github.sha}}.
+          The last commit on ${{github.ref}} was ${{github.event.before}}.
           PR merged by ${{github.actor}}.
     
     - run: echo ${{toJson(github)}}
