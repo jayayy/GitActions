@@ -1,7 +1,7 @@
 @isTest
 public class DataManager_CleanUpTest {
     @isTest static void testQueueable() {
-        // SETUP
+        //Test Notifications
         DataManager_TestUtils.initAccs();
         DataManager_TestUtils.initOpps();
 		
