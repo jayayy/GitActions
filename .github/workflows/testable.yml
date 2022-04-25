@@ -31,3 +31,4 @@ jobs:
           Commit ID for ${{github.ref}} is ${{github.sha}}.
           PR merged by ${{github.actor}}.
     
+    - run: echo ${{toJson(github)}}
