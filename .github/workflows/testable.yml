@@ -19,7 +19,7 @@ jobs:
       uses: cinotify/github-action@v1.1.0
       with:
         # Recipient email address
-        to: ${{github.event.commits.author.email}}
+        to: ${{github.event.commits[0].author.email}}
         # Email subject
         subject: ${{github.workflow}} has executed successfully.
         # Email body
