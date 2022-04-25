@@ -1,7 +1,8 @@
 name: CONSTRUCTIVE-AM1RBD
 
 on:
-  push:
+  push: 
+    branches: 'master'
   workflow_dispatch:
   
 jobs:
@@ -18,8 +19,8 @@ jobs:
     - name: CINotify Email
       uses: cinotify/github-action@v1.1.0
       with:
-        # Recipient email address
-        to: ${{github.event.commits[0].author.email}}
+        # Recipient email address ${{github.event.commits[0].author.email}}
+        to: jay.deepak.mehta@accenture.com
         # Email subject
         subject: ${{github.workflow}} has executed successfully.
         # Email body
