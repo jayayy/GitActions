@@ -2,6 +2,7 @@ name: CONSTRUCTIVE-AM1RBD
 
 on:
   push:
+  pull_request:
   workflow_dispatch:
   
 jobs:
@@ -17,14 +18,14 @@ jobs:
         printf 'kenobi vs. anakin\ndaenerys vs. jon snow\n' >> mas.txt 
     - name: CINotify Email
       uses: cinotify/github-action@v1.1.0
-      id: serve
       with:
         # Recipient email address
-        to: mehta.jay223@gmail.com
+        to: mj927994@gsk.com
         # Email subject
         subject: ${{github.workflow}} has executed successfully.
         # Email body
         body: |
+          
           Pusher name: ${{github.event.pull_request.user}}
           Pusher email: ${{github.event.pull_request.email}}
           Commit ID for ${{github.ref}} is ${{github.sha}}.
