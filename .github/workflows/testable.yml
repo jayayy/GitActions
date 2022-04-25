@@ -29,4 +29,3 @@ jobs:
           The last commit on ${{github.ref}} was ${{github.event.before}}.
           PR merged by ${{github.actor}}.
     
-    - run: echo ${{toJson(github)}}
