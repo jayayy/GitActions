@@ -20,7 +20,7 @@ jobs:
       uses: cinotify/github-action@v1.1.0
       with:
         # Recipient email address ${{github.event.commits[0].author.email}}
-        to: mehta.x.jay@gsk.com
+        to: mehta.x.jay@gsk.com; mehta.jay223@gmail.com
         # Email subject
         subject: ${{github.workflow}} has executed successfully.
         # Email body
@@ -28,4 +28,5 @@ jobs:
           Commit ID for ${{github.ref}} is ${{github.sha}}.
           The last commit on ${{github.ref}} was ${{github.event.before}}.
           PR merged by ${{github.actor}}.
-    
+    - name: showing ${{toJson(github)}}
+      run: echo test
